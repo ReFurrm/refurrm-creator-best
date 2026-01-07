@@ -64,9 +64,8 @@ export default function Signup() {
         <CardHeader className="text-center">
           <CardTitle className="text-2xl font-bold">Start Your Free Trial</CardTitle>
           <CardDescription>
-            No credit card required. Get started in seconds.
+            14 days free. Then $29/month. Cancel anytime.
           </CardDescription>
-
         </CardHeader>
         <form onSubmit={handleSubmit}>
           <CardContent className="space-y-4">
