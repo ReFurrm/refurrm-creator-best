@@ -40,7 +40,7 @@ export default function Onboarding() {
 
   const handleNext = async () => {
     if (currentStep > 0) {
-      await updateStep(currentStep);
+      await updateStep(currentStep + 1);
     }
     
     if (currentStep === STEPS.length - 1) {
@@ -48,9 +48,6 @@ export default function Onboarding() {
       navigate('/store-builder');
 
     } else {
-      if (currentStep > 0) {
-        await updateStep(currentStep + 1);
-      }
       setCurrentStep(currentStep + 1);
     }
 
@@ -58,7 +55,7 @@ export default function Onboarding() {
 
   const handleSkip = async () => {
     if (currentStep > 0) {
-      await updateStep(currentStep);
+      await updateStep(currentStep + 1);
     }
     
     if (currentStep === STEPS.length - 1) {

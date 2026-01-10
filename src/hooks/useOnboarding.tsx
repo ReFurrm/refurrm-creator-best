@@ -57,7 +57,7 @@ export const useOnboarding = () => {
 
     const { error } = await supabase
       .from('user_profiles')
-      .update({ onboarding_step: step + 1 })
+      .update({ onboarding_step: step })
       .eq('id', user.id);
 
     if (!error) fetchProgress();

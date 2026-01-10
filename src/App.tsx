@@ -70,6 +70,7 @@ import Collections from '@/pages/Collections';
 import CollectionStorefront from '@/pages/CollectionStorefront';
 import SocialMediaAnalytics from '@/pages/SocialMediaAnalytics';
 import CreatorRights from '@/pages/CreatorRights';
+import Community from '@/pages/Community';
 
 
 
@@ -79,7 +80,6 @@ import './App.css';
 
 
 function App() {
-  console.log('🚀 App: Starting application...');
   
   return (
     <ErrorBoundary>
@@ -161,6 +161,7 @@ function App() {
               <Route path="/reviews-analytics" element={<ProtectedRoute><ReviewsAnalytics /></ProtectedRoute>} />
               <Route path="/email-campaigns" element={<ProtectedRoute><EmailCampaigns /></ProtectedRoute>} />
               <Route path="/social-analytics" element={<ProtectedRoute><SocialMediaAnalytics /></ProtectedRoute>} />
+              <Route path="/community" element={<ProtectedRoute><Community /></ProtectedRoute>} />
 
 
 

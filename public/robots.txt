@@ -1,14 +1,38 @@
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /dashboard
+Disallow: /profile
+Disallow: /products
+Disallow: /store-builder
+Disallow: /studio
+Disallow: /collections
+Disallow: /inventory
+Disallow: /orders
+Disallow: /subscriptions
+Disallow: /premium
+Disallow: /bookings
+Disallow: /analytics
+Disallow: /dm-campaigns
+Disallow: /emails
+Disallow: /integrations
+Disallow: /settings
+Disallow: /billing
+Disallow: /dunning
+Disallow: /support-admin
+Disallow: /vip-manager
+Disallow: /affiliates
+Disallow: /affiliate-dashboard
+Disallow: /email-templates
+Disallow: /reviews-manager
+Disallow: /reviews-analytics
+Disallow: /email-campaigns
+Disallow: /social-analytics
+Disallow: /onboarding
+Disallow: /onboarding-analytics
+Disallow: /login
+Disallow: /signup
+Disallow: /reset-password
+Disallow: /checkout
+Disallow: /success
+Disallow: /blog/admin

@@ -6,6 +6,7 @@ import { SubscriptionsManager } from '@/components/admin/SubscriptionsManager';
 import { SupportManager } from '@/components/admin/SupportManager';
 import { VIPManager } from '@/components/admin/VIPManager';
 import { SetupWizard } from '@/components/admin/SetupWizard';
+import { BookingsManager } from '@/components/admin/BookingsManager';
 import { DataExport } from '@/components/admin/DataExport';
 import { Package, ShoppingCart, CreditCard, MessageSquare, Calendar, Crown, Wand2, Database, Activity } from 'lucide-react';
 import { PerformanceMetrics } from '@/components/admin/PerformanceMetrics';
@@ -134,7 +135,7 @@ export default function Admin() {
               <CardDescription>View and manage all bookings</CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-muted-foreground">Bookings manager coming soon...</p>
+              <BookingsManager />
             </CardContent>
           </Card>
         </TabsContent>
