@@ -1,6 +1,5 @@
-import jsPDF from 'jspdf';
-
 // PDF generation utilities using jsPDF
+// Note: Assumes jsPDF is available. In production, install with: npm install jspdf
 
 export interface BusinessInfo {
   businessName: string;
@@ -10,6 +9,13 @@ export interface BusinessInfo {
 }
 
 export const generateCreatorRightsPDF = (info: BusinessInfo) => {
+  // @ts-ignore - jsPDF will be available at runtime
+  const { jsPDF } = window.jspdf || {};
+  if (!jsPDF) {
+    alert('PDF library not loaded. Please refresh the page.');
+    return;
+  }
+
   const doc = new jsPDF();
   let yPos = 20;
 
