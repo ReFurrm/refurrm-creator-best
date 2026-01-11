@@ -107,7 +107,7 @@ export default function Storefront() {
                   className="bg-white rounded-lg p-6 shadow hover:shadow-lg transition"
                 >
                   <div className="flex items-center gap-3 mb-3">
-                    <Layers className="w-6 h-6 text-purple-600" />
+                    <Layers className="w-6 h-6 text-pale skin-600" />
                     <h3 className="text-xl font-semibold">{collection.name}</h3>
                   </div>
                   <p className="text-slate-600 text-sm mb-2">{collection.description}</p>

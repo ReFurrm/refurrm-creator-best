@@ -72,8 +72,8 @@ export default function Billing() {
             </div>
 
             {profile?.subscription_status === 'trial' && trialDaysLeft > 0 && (
-              <div className="bg-purple-50 border border-purple-200 rounded-lg p-4 mb-6">
-                <p className="text-purple-900">
+              <div className="bg-pale skin-50 border border-pale skin-200 rounded-lg p-4 mb-6">
+                <p className="text-pale skin-900">
                   <strong>{trialDaysLeft} days</strong> left in your free trial. 
                   Add a payment method to continue after your trial ends.
                 </p>
@@ -91,7 +91,7 @@ export default function Billing() {
               <button
                 onClick={handleAddPayment}
                 disabled={loading}
-                className="w-full px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700 transition disabled:opacity-50"
+                className="w-full px-6 py-3 bg-pale skin-600 text-white rounded-lg font-semibold hover:bg-pale skin-700 transition disabled:opacity-50"
               >
                 {profile?.subscription_status === 'trial' ? 'Add Payment Method' : 'Update Payment Method'}
               </button>

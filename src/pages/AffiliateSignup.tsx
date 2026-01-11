@@ -62,7 +62,7 @@ export default function AffiliateSignup() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-pale skin-50 to-blue-50 p-6">
       <div className="max-w-3xl mx-auto">
         <Card>
           <CardHeader>

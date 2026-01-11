@@ -47,7 +47,7 @@ export default function VIPManager() {
       <Card>
         <CardHeader>
           <div className="flex items-center gap-3">
-            <Crown className="h-8 w-8 text-purple-600" />
+            <Crown className="h-8 w-8 text-pale skin-600" />
             <div>
               <CardTitle>VIP Access Manager</CardTitle>
               <CardDescription>
@@ -101,9 +101,9 @@ export default function VIPManager() {
             </Alert>
           )}
 
-          <div className="bg-purple-50 border border-purple-200 rounded-lg p-4">
-            <h3 className="font-semibold text-purple-900 mb-2">VIP Benefits</h3>
-            <ul className="text-sm text-purple-700 space-y-1">
+          <div className="bg-pale skin-50 border border-pale skin-200 rounded-lg p-4">
+            <h3 className="font-semibold text-pale skin-900 mb-2">VIP Benefits</h3>
+            <ul className="text-sm text-pale skin-700 space-y-1">
               <li>• Unlimited products, customers, and bookings</li>
               <li>• Unlimited email campaigns and AI tools</li>
               <li>• All premium features completely free</li>

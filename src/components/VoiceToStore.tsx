@@ -78,9 +78,9 @@ export default function VoiceToStore() {
             rows={5}
             className="resize-none"
           />
-          <Sparkles className="absolute top-3 right-3 h-5 w-5 text-purple-400" />
+          <Sparkles className="absolute top-3 right-3 h-5 w-5 text-pale skin-400" />
         </div>
-        <Button onClick={generateStore} disabled={loading || !idea.trim()} className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
+        <Button onClick={generateStore} disabled={loading || !idea.trim()} className="w-full bg-gradient-to-r from-pale skin-600 to-blue-600 hover:from-pale skin-700 hover:to-blue-700">
           {loading ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Building Store...</> : 'Build My Store'}
         </Button>
       </div>
@@ -96,14 +96,14 @@ export default function VoiceToStore() {
             </Button>
           </div>
 
-          <Card className="p-6 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 border-2">
+          <Card className="p-6 bg-gradient-to-br from-blue-50 via-pale skin-50 to-pink-50 border-2">
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-bold text-xl">Landing Page</h3>
               <Button size="sm" variant="ghost" onClick={() => copyToClipboard(`${store.landingPage?.headline}\n${store.landingPage?.subheadline}\n\n${store.landingPage?.heroText}`, 'landing')}>
                 {copiedId === 'landing' ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
               </Button>
             </div>
-            <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">{store.landingPage?.headline}</h2>
+            <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-pale skin-600 bg-clip-text text-transparent">{store.landingPage?.headline}</h2>
             <p className="text-lg text-gray-700 mt-3 font-medium">{store.landingPage?.subheadline}</p>
             <p className="text-gray-600 mt-4 leading-relaxed">{store.landingPage?.heroText}</p>
             <div className="mt-6 grid gap-3">
@@ -123,7 +123,7 @@ export default function VoiceToStore() {
                 {copiedId === 'magnet' ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
               </Button>
             </div>
-            <p className="font-semibold text-xl text-purple-600">{store.leadMagnet?.title}</p>
+            <p className="font-semibold text-xl text-pale skin-600">{store.leadMagnet?.title}</p>
             <p className="text-sm text-gray-600 mt-3 whitespace-pre-wrap leading-relaxed bg-gray-50 p-4 rounded">{store.leadMagnet?.content}</p>
           </Card>
 

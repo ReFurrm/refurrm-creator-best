@@ -90,9 +90,9 @@ export default function Bookings() {
                       )}
 
                       {booking.ai_brief && (
-                        <div className="mt-3 p-3 bg-purple-50 rounded">
-                          <p className="text-sm font-medium text-purple-900 mb-1">AI Brief:</p>
-                          <p className="text-sm text-purple-700">{booking.ai_brief}</p>
+                        <div className="mt-3 p-3 bg-pale skin-50 rounded">
+                          <p className="text-sm font-medium text-pale skin-900 mb-1">AI Brief:</p>
+                          <p className="text-sm text-pale skin-700">{booking.ai_brief}</p>
                         </div>
                       )}
                     </div>

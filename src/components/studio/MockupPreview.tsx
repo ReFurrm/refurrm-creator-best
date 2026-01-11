@@ -84,7 +84,7 @@ export default function MockupPreview({ mockups, onAddToStore }: Props) {
           <h2 className="text-2xl font-bold">Generated Mockups</h2>
           <p className="text-gray-600 mt-1">{mockups.length} products ready</p>
         </div>
-        <Button onClick={addAllToStore} disabled={adding} size="lg" className="bg-gradient-to-r from-purple-600 to-pink-600">
+        <Button onClick={addAllToStore} disabled={adding} size="lg" className="bg-gradient-to-r from-pale skin-600 to-pink-600">
           {adding ? <Loader2 className="mr-2 h-5 w-5 animate-spin" /> : <ShoppingCart className="mr-2 h-5 w-5" />}
           Add All to Store
         </Button>

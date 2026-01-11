@@ -136,7 +136,7 @@ export default function Integrations() {
                         className={`px-6 py-3 rounded-lg font-semibold transition ${
                           integration.status === 'Connected'
                             ? 'bg-slate-200 text-slate-700 hover:bg-slate-300'
-                            : 'bg-purple-600 text-white hover:bg-purple-700'
+                            : 'bg-pale skin-600 text-white hover:bg-pale skin-700'
                         }`}
                       >
                         {integration.status === 'Connected' ? 'Disconnect' : 'Connect'}

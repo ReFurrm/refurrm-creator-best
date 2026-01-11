@@ -5,10 +5,10 @@ import { Crown, Video, FileText, Download } from 'lucide-react';
 
 export default function PremiumContent() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-pale skin-50 to-white">
       <div className="max-w-4xl mx-auto px-4 py-12">
         <div className="text-center mb-8">
-          <Crown className="w-16 h-16 text-purple-600 mx-auto mb-4" />
+          <Crown className="w-16 h-16 text-pale skin-600 mx-auto mb-4" />
           <h1 className="text-4xl font-bold mb-2">Premium Content</h1>
           <p className="text-gray-600">Exclusive resources for subscribers</p>
         </div>
@@ -22,7 +22,7 @@ export default function PremiumContent() {
                     <Video className="w-5 h-5" />
                     Masterclass Videos
                   </CardTitle>
-                  <Badge className="bg-purple-600">Premium</Badge>
+                  <Badge className="bg-pale skin-600">Premium</Badge>
                 </div>
               </CardHeader>
               <CardContent>
@@ -50,11 +50,11 @@ export default function PremiumContent() {
                 <div className="space-y-3">
                   <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                     <span className="font-medium">Content Calendar Template</span>
-                    <Download className="w-5 h-5 text-purple-600" />
+                    <Download className="w-5 h-5 text-pale skin-600" />
                   </div>
                   <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                     <span className="font-medium">Email Sequence Pack</span>
-                    <Download className="w-5 h-5 text-purple-600" />
+                    <Download className="w-5 h-5 text-pale skin-600" />
                   </div>
                 </div>
               </CardContent>

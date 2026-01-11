@@ -201,9 +201,9 @@ export default function DMCampaigns() {
                   
                   {campaign.suggested_caption && (
                     <CardContent>
-                      <div className="p-3 bg-purple-50 rounded">
-                        <p className="text-sm font-medium text-purple-900 mb-1">Suggested Caption:</p>
-                        <p className="text-sm text-purple-700">{campaign.suggested_caption}</p>
+                      <div className="p-3 bg-pale skin-50 rounded">
+                        <p className="text-sm font-medium text-pale skin-900 mb-1">Suggested Caption:</p>
+                        <p className="text-sm text-pale skin-700">{campaign.suggested_caption}</p>
                       </div>
                     </CardContent>
                   )}

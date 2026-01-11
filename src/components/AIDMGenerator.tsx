@@ -64,7 +64,7 @@ export default function AIDMGenerator({ open, onClose, onApply }: Props) {
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
-            <Sparkles className="w-5 h-5 text-purple-600" />
+            <Sparkles className="w-5 h-5 text-pale skin-600" />
             AI DM Script Generator
           </DialogTitle>
           <DialogDescription>
@@ -113,7 +113,7 @@ export default function AIDMGenerator({ open, onClose, onApply }: Props) {
                 placeholder="E.g., Instagram Growth Course"
               />
             </div>
-            <Button onClick={handleGenerate} disabled={loading} className="w-full bg-purple-600 hover:bg-purple-700">
+            <Button onClick={handleGenerate} disabled={loading} className="w-full bg-pale skin-600 hover:bg-pale skin-700">
               {loading ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Generating...</> : <><Sparkles className="mr-2 h-4 w-4" />Generate Script</>}
             </Button>
           </div>
@@ -125,7 +125,7 @@ export default function AIDMGenerator({ open, onClose, onApply }: Props) {
               </Button>
             </div>
 
-            <div className="p-4 bg-gradient-to-r from-purple-100 to-pink-100 rounded-lg">
+            <div className="p-4 bg-gradient-to-r from-pale skin-100 to-pink-100 rounded-lg">
               <div className="flex items-center justify-between mb-2">
                 <Label className="text-base font-semibold">Suggested Caption</Label>
                 <Button size="sm" variant="ghost" onClick={() => copyToClipboard(result.suggestedCaption, 'caption')}>
@@ -141,11 +141,11 @@ export default function AIDMGenerator({ open, onClose, onApply }: Props) {
               <div className="space-y-3">
                 {result.dmSequence?.map((dm: any, i: number) => (
                   <div key={i} className="relative">
-                    <div className="p-4 bg-white rounded-lg border-2 border-purple-200 hover:border-purple-400 transition-colors">
+                    <div className="p-4 bg-white rounded-lg border-2 border-pale skin-200 hover:border-pale skin-400 transition-colors">
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center gap-2">
-                          <MessageSquare className="h-4 w-4 text-purple-600" />
-                          <span className="text-xs font-semibold text-purple-600">Message {dm.order}</span>
+                          <MessageSquare className="h-4 w-4 text-pale skin-600" />
+                          <span className="text-xs font-semibold text-pale skin-600">Message {dm.order}</span>
                           <span className="text-xs text-gray-500">• Delay: {dm.delayMinutes} min</span>
                         </div>
                         <Button size="sm" variant="ghost" onClick={() => copyToClipboard(dm.message, `dm-${i}`)}>
@@ -156,7 +156,7 @@ export default function AIDMGenerator({ open, onClose, onApply }: Props) {
                     </div>
                     {i < result.dmSequence.length - 1 && (
                       <div className="flex justify-center my-2">
-                        <div className="h-6 w-0.5 bg-purple-300"></div>
+                        <div className="h-6 w-0.5 bg-pale skin-300"></div>
                       </div>
                     )}
                   </div>
@@ -164,7 +164,7 @@ export default function AIDMGenerator({ open, onClose, onApply }: Props) {
               </div>
             </div>
 
-            <Button onClick={() => { onApply(result); onClose(); }} className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
+            <Button onClick={() => { onApply(result); onClose(); }} className="w-full bg-gradient-to-r from-pale skin-600 to-blue-600 hover:from-pale skin-700 hover:to-blue-700">
               Use This Campaign
             </Button>
           </div>

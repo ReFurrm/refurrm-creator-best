@@ -25,13 +25,13 @@ export default function MockupTemplateGrid({ products, selectedProducts, onToggl
             <Card
               key={product.id}
               className={`p-4 cursor-pointer transition-all hover:shadow-lg ${
-                isSelected ? 'ring-2 ring-purple-500 bg-purple-50' : ''
+                isSelected ? 'ring-2 ring-pale skin-500 bg-pale skin-50' : ''
               }`}
               onClick={() => onToggleProduct(product.id)}
             >
               <div className="aspect-square bg-gray-100 rounded-lg mb-3 flex items-center justify-center relative">
                 {isSelected && (
-                  <div className="absolute top-2 right-2 bg-purple-600 text-white rounded-full p-1">
+                  <div className="absolute top-2 right-2 bg-pale skin-600 text-white rounded-full p-1">
                     <Check className="w-4 h-4" />
                   </div>
                 )}

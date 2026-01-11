@@ -22,35 +22,35 @@ export default function PlanComparisonCards({ currentPlan, isVip }: PlanComparis
           <CardDescription>You have unlimited access to all features</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="border-2 border-purple-500 rounded-lg p-6 bg-gradient-to-r from-purple-50 to-pink-50">
+          <div className="border-2 border-pale skin-500 rounded-lg p-6 bg-gradient-to-r from-pale skin-50 to-pink-50">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-bold text-2xl text-purple-900">VIP Premium</h3>
-              <Badge className="bg-gradient-to-r from-purple-600 to-pink-600">Special Access</Badge>
+              <h3 className="font-bold text-2xl text-pale skin-900">VIP Premium</h3>
+              <Badge className="bg-gradient-to-r from-pale skin-600 to-pink-600">Special Access</Badge>
             </div>
-            <p className="text-4xl font-bold mb-4 text-purple-900">Free<span className="text-sm text-gray-600">/forever</span></p>
+            <p className="text-4xl font-bold mb-4 text-pale skin-900">Free<span className="text-sm text-gray-600">/forever</span></p>
             <ul className="space-y-2 mb-4">
               <li className="flex items-center gap-2 text-sm">
-                <Check className="h-4 w-4 text-purple-600" />
+                <Check className="h-4 w-4 text-pale skin-600" />
                 Unlimited Products
               </li>
               <li className="flex items-center gap-2 text-sm">
-                <Check className="h-4 w-4 text-purple-600" />
+                <Check className="h-4 w-4 text-pale skin-600" />
                 Unlimited Customers
               </li>
               <li className="flex items-center gap-2 text-sm">
-                <Check className="h-4 w-4 text-purple-600" />
+                <Check className="h-4 w-4 text-pale skin-600" />
                 Unlimited Emails
               </li>
               <li className="flex items-center gap-2 text-sm">
-                <Check className="h-4 w-4 text-purple-600" />
+                <Check className="h-4 w-4 text-pale skin-600" />
                 Unlimited Bookings
               </li>
               <li className="flex items-center gap-2 text-sm">
-                <Check className="h-4 w-4 text-purple-600" />
+                <Check className="h-4 w-4 text-pale skin-600" />
                 All AI Tools & Features
               </li>
               <li className="flex items-center gap-2 text-sm">
-                <Check className="h-4 w-4 text-purple-600" />
+                <Check className="h-4 w-4 text-pale skin-600" />
                 Priority Support
               </li>
             </ul>

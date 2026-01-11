@@ -7,7 +7,7 @@ export default function DPA() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-pale skin-50 to-blue-50 p-6">
       <div className="max-w-4xl mx-auto">
         <Button variant="ghost" onClick={() => navigate(-1)} className="mb-6">
           <ArrowLeft className="h-4 w-4 mr-2" />

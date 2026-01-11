@@ -78,7 +78,7 @@ export default function AIProductGenerator({ open, onClose, onApply }: AIProduct
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
-            <Sparkles className="w-5 h-5 text-purple-600" />
+            <Sparkles className="w-5 h-5 text-pale skin-600" />
             AI Product Copy Generator
           </DialogTitle>
           <DialogDescription>
@@ -140,7 +140,7 @@ export default function AIProductGenerator({ open, onClose, onApply }: AIProduct
               </Select>
             </div>
 
-            <Button onClick={handleGenerate} disabled={loading} className="w-full bg-purple-600 hover:bg-purple-700">
+            <Button onClick={handleGenerate} disabled={loading} className="w-full bg-pale skin-600 hover:bg-pale skin-700">
               {loading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -167,7 +167,7 @@ export default function AIProductGenerator({ open, onClose, onApply }: AIProduct
               <p className="text-xs text-gray-500 mb-2">Pick your favorite or mix and match</p>
               <div className="space-y-2">
                 {result.nameOptions?.map((name: string, i: number) => (
-                  <div key={i} className="p-3 bg-gradient-to-r from-purple-50 to-pink-50 rounded border flex justify-between items-center hover:shadow-md transition-shadow">
+                  <div key={i} className="p-3 bg-gradient-to-r from-pale skin-50 to-pink-50 rounded border flex justify-between items-center hover:shadow-md transition-shadow">
                     <span className="font-medium">{name}</span>
                     <Button size="sm" variant="ghost" onClick={() => copyToClipboard(name, `name-${i}`)}>
                       {copiedId === `name-${i}` ? <Check className="w-4 h-4 text-green-600" /> : <Copy className="w-4 h-4" />}
@@ -199,13 +199,13 @@ export default function AIProductGenerator({ open, onClose, onApply }: AIProduct
               </div>
             </div>
 
-            <div className="p-4 bg-gradient-to-r from-purple-100 to-blue-100 rounded-lg">
+            <div className="p-4 bg-gradient-to-r from-pale skin-100 to-blue-100 rounded-lg">
               <Label className="text-base font-semibold">Suggested Price</Label>
-              <p className="text-3xl font-bold text-purple-600 mt-2">${result.suggestedPrice}</p>
+              <p className="text-3xl font-bold text-pale skin-600 mt-2">${result.suggestedPrice}</p>
             </div>
 
             <div className="flex gap-2">
-              <Button onClick={handleApply} className="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
+              <Button onClick={handleApply} className="flex-1 bg-gradient-to-r from-pale skin-600 to-pink-600 hover:from-pale skin-700 hover:to-pink-700">
                 Apply to Product
               </Button>
               <Button onClick={handleReset} variant="outline">

@@ -25,20 +25,20 @@ export function ProtectedContent({
   if (loading) {
     return (
       <div className="flex items-center justify-center p-8">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-pale skin-600"></div>
       </div>
     );
   }
 
   if (!user) {
     return fallback || (
-      <Card className="border-purple-200">
+      <Card className="border-pale skin-200">
         <CardContent className="p-8 text-center">
-          <Lock className="w-12 h-12 text-purple-600 mx-auto mb-4" />
+          <Lock className="w-12 h-12 text-pale skin-600 mx-auto mb-4" />
           <h3 className="text-xl font-semibold mb-2">Sign In Required</h3>
           <p className="text-gray-600 mb-4">Please sign in to access this content</p>
           <Link to="/login">
-            <Button className="bg-purple-600 hover:bg-purple-700">Sign In</Button>
+            <Button className="bg-pale skin-600 hover:bg-pale skin-700">Sign In</Button>
           </Link>
         </CardContent>
       </Card>
@@ -60,7 +60,7 @@ export function ProtectedContent({
           <p className="text-gray-600 mb-4">Subscribe to access this premium content</p>
           <Link to="/pricing">
 
-            <Button className="bg-purple-600 hover:bg-purple-700">View Plans</Button>
+            <Button className="bg-pale skin-600 hover:bg-pale skin-700">View Plans</Button>
           </Link>
         </CardContent>
       </Card>

@@ -47,7 +47,7 @@ export default function CartDrawer() {
                       />
                       <div className="flex-1">
                         <h3 className="font-semibold text-sm mb-1">{item.name}</h3>
-                        <p className="text-lg font-bold text-purple-600">${item.price.toFixed(2)}</p>
+                        <p className="text-lg font-bold text-pale skin-600">${item.price.toFixed(2)}</p>
                         <div className="flex items-center gap-2 mt-2">
                           <Button
                             size="icon"
@@ -87,7 +87,7 @@ export default function CartDrawer() {
               <div className="space-y-4">
                 <div className="flex justify-between text-lg font-bold">
                   <span>Total:</span>
-                  <span className="text-purple-600">${totalPrice.toFixed(2)}</span>
+                  <span className="text-pale skin-600">${totalPrice.toFixed(2)}</span>
                 </div>
                 <Button onClick={handleCheckout} className="w-full" size="lg">
                   Proceed to Checkout

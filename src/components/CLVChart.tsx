@@ -14,7 +14,7 @@ export default function CLVChart({ data, averageCLV }: CLVChartProps) {
           <CardTitle>Customer Lifetime Value</CardTitle>
           <div className="text-right">
             <p className="text-sm text-slate-600">Average CLV</p>
-            <p className="text-2xl font-bold text-purple-600">${averageCLV.toFixed(2)}</p>
+            <p className="text-2xl font-bold text-pale skin-600">${averageCLV.toFixed(2)}</p>
           </div>
         </div>
       </CardHeader>

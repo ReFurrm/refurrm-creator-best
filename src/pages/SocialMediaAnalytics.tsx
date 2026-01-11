@@ -88,7 +88,7 @@ export default function SocialMediaAnalytics() {
             <Card>
               <CardHeader>
                 <div className="flex items-center gap-3">
-                  <Share2 className="w-8 h-8 text-purple-600" />
+                  <Share2 className="w-8 h-8 text-pale skin-600" />
                   <div>
                     <p className="text-sm text-slate-600">Avg Engagement</p>
                     <p className="text-2xl font-bold">

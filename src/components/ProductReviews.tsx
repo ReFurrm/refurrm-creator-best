@@ -157,7 +157,7 @@ export default function ProductReviews({ productId }: ProductReviewsProps) {
                   </div>
                 ))}
                 {photos.length < 3 && (
-                  <label className="w-24 h-24 border-2 border-dashed border-slate-600 rounded flex items-center justify-center cursor-pointer hover:border-purple-500">
+                  <label className="w-24 h-24 border-2 border-dashed border-slate-600 rounded flex items-center justify-center cursor-pointer hover:border-pale skin-500">
                     <Upload className="w-6 h-6 text-slate-400" />
                     <input type="file" accept="image/*" onChange={handlePhotoChange} className="hidden" />
                   </label>

@@ -58,7 +58,7 @@ export default function StudioPublished() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {products.map((product) => (
           <Card key={product.id} className="overflow-hidden hover:shadow-lg transition-shadow">
-            <div className="aspect-square bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center">
+            <div className="aspect-square bg-gradient-to-br from-pale skin-100 to-pink-100 flex items-center justify-center">
               {product.image_url ? (
                 <img src={product.image_url} alt={product.name} className="w-full h-full object-cover" />
               ) : (
@@ -70,7 +70,7 @@ export default function StudioPublished() {
               <p className="text-sm text-gray-600 mb-3 line-clamp-2">{product.description}</p>
               
               <div className="flex items-center justify-between mb-3">
-                <span className="text-2xl font-bold text-purple-600">${product.price}</span>
+                <span className="text-2xl font-bold text-pale skin-600">${product.price}</span>
                 <Badge variant="outline" className="text-green-600">
                   <DollarSign className="h-3 w-3 mr-1" />
                   {product.sales || 0} sales
@@ -82,7 +82,7 @@ export default function StudioPublished() {
                   <Edit className="h-4 w-4 mr-1" />
                   Edit
                 </Button>
-                <Button size="sm" className="flex-1 bg-purple-600 hover:bg-purple-700">
+                <Button size="sm" className="flex-1 bg-pale skin-600 hover:bg-pale skin-700">
                   <ExternalLink className="h-4 w-4 mr-1" />
                   View
                 </Button>

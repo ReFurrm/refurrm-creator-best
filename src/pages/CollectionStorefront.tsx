@@ -56,7 +56,7 @@ export default function CollectionStorefront() {
     <div className="min-h-screen bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="flex items-center gap-2 text-sm text-slate-600 mb-6">
-          <Link to="/storefront" className="hover:text-purple-600">Home</Link>
+          <Link to="/storefront" className="hover:text-pale skin-600">Home</Link>
           <ChevronRight className="w-4 h-4" />
           <span className="text-slate-900">{collection.name}</span>
         </div>

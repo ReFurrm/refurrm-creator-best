@@ -9,12 +9,12 @@ export default function CartIcon() {
     <Button
       variant="ghost"
       size="icon"
-      className="relative text-white hover:text-purple-300"
+      className="relative text-white hover:text-pale skin-300"
       onClick={openCart}
     >
       <ShoppingCart className="h-6 w-6" />
       {totalItems > 0 && (
-        <span className="absolute -top-1 -right-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+        <span className="absolute -top-1 -right-1 bg-gradient-to-r from-pale skin-600 to-pink-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
           {totalItems > 99 ? '99+' : totalItems}
         </span>
       )}

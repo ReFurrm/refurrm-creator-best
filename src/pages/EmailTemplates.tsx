@@ -145,7 +145,7 @@ export default function EmailTemplates() {
                       <button 
                         key={tag} 
                         onClick={() => insertMergeTag(tag)}
-                        className="px-2 py-1 bg-purple-600 text-white text-xs rounded hover:bg-purple-700 cursor-pointer"
+                        className="px-2 py-1 bg-pale skin-600 text-white text-xs rounded hover:bg-pale skin-700 cursor-pointer"
                       >
                         {tag}
                       </button>

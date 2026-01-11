@@ -14,11 +14,11 @@ interface ConversionFunnelChartProps {
 
 export default function ConversionFunnelChart({ data }: ConversionFunnelChartProps) {
   const stages = [
-    { label: 'Visitors', value: data.visitors, color: 'bg-purple-500' },
-    { label: 'Product Views', value: data.productViews, color: 'bg-purple-600' },
-    { label: 'Add to Cart', value: data.addToCart, color: 'bg-purple-700' },
-    { label: 'Checkout', value: data.checkout, color: 'bg-purple-800' },
-    { label: 'Completed', value: data.completed, color: 'bg-purple-900' },
+    { label: 'Visitors', value: data.visitors, color: 'bg-pale skin-500' },
+    { label: 'Product Views', value: data.productViews, color: 'bg-pale skin-600' },
+    { label: 'Add to Cart', value: data.addToCart, color: 'bg-pale skin-700' },
+    { label: 'Checkout', value: data.checkout, color: 'bg-pale skin-800' },
+    { label: 'Completed', value: data.completed, color: 'bg-pale skin-900' },
   ];
 
   const maxValue = data.visitors || 1;

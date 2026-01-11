@@ -43,7 +43,7 @@ export default function LegalDocumentGenerator() {
   return (
     <Card className="p-8">
       <div className="flex items-center gap-3 mb-6">
-        <FileText className="h-8 w-8 text-purple-600" />
+        <FileText className="h-8 w-8 text-pale skin-600" />
         <h2 className="text-2xl font-bold">Generate Custom Legal Documents</h2>
       </div>
 

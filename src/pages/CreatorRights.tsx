@@ -19,7 +19,7 @@ export default function CreatorRights() {
 
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-pale skin-50 to-white">
       <div className="max-w-4xl mx-auto px-4 py-16">
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold mb-4">Creator Rights & Ownership</h1>
@@ -35,13 +35,13 @@ export default function CreatorRights() {
         <div className="space-y-8">
           <Card className="p-8">
             <div className="flex items-start gap-4 mb-4">
-              <Shield className="h-8 w-8 text-purple-600 flex-shrink-0" />
+              <Shield className="h-8 w-8 text-pale skin-600 flex-shrink-0" />
               <div>
                 <h2 className="text-2xl font-bold mb-3">Copyright Ownership</h2>
                 <p className="text-gray-700 mb-4">
                   <strong>You retain 100% ownership</strong> of all artwork, designs, and creative content you upload to ReFurrm.
                 </p>
-                <div className="bg-purple-50 p-4 rounded-lg mb-4">
+                <div className="bg-pale skin-50 p-4 rounded-lg mb-4">
                   <p className="font-semibold mb-2">What this means:</p>
                   <ul className="list-disc list-inside space-y-1 text-gray-700">
                     <li>ReFurrm does not claim any ownership rights to your work</li>
@@ -120,13 +120,13 @@ export default function CreatorRights() {
 
           <Card className="p-8">
             <div className="flex items-start gap-4 mb-4">
-              <Eye className="h-8 w-8 text-purple-600 flex-shrink-0" />
+              <Eye className="h-8 w-8 text-pale skin-600 flex-shrink-0" />
               <div>
                 <h2 className="text-2xl font-bold mb-3">AI Assistance: Opt-In Controls</h2>
                 <p className="text-gray-700 mb-4">
                   <strong>AI tools are optional and request-based.</strong> You control when and how AI assists you.
                 </p>
-                <div className="bg-purple-50 p-4 rounded-lg mb-4">
+                <div className="bg-pale skin-50 p-4 rounded-lg mb-4">
                   <p className="font-semibold mb-2">Default settings:</p>
                   <ul className="list-disc list-inside space-y-1 text-gray-700">
                     <li>Manual approval required for all AI-generated content</li>
@@ -175,7 +175,7 @@ export default function CreatorRights() {
               </div>
             </div>
           </Card>
-          <Card className="p-8 bg-gradient-to-br from-purple-50 to-blue-50 border-2 border-purple-200">
+          <Card className="p-8 bg-gradient-to-br from-pale skin-50 to-blue-50 border-2 border-pale skin-200">
             <h2 className="text-2xl font-bold mb-4 text-center">Our Commitment to Creators</h2>
             <div className="space-y-3 text-gray-700">
               <p>✓ <strong>We will never claim ownership</strong> of your artwork or designs</p>
@@ -186,7 +186,7 @@ export default function CreatorRights() {
             </div>
             <div className="mt-6 text-center">
               <p className="text-sm text-gray-600 mb-4">
-                Last updated: November 26, 2025 | Questions? <a href="/contact" className="text-purple-600 hover:underline">Contact us</a>
+                Last updated: November 26, 2025 | Questions? <a href="/contact" className="text-pale skin-600 hover:underline">Contact us</a>
               </p>
               <Button onClick={handleDownloadPDF} variant="outline">
                 <Download className="mr-2 h-4 w-4" />

@@ -43,10 +43,10 @@ export default function ProductCard({ product }: ProductCardProps) {
         <h3 className="font-semibold text-lg mb-1 line-clamp-1">{product.name}</h3>
         <p className="text-sm text-gray-600 mb-3 line-clamp-2">{product.description}</p>
         <div className="flex items-center justify-between">
-          <p className="text-2xl font-bold text-purple-600">${product.price.toFixed(2)}</p>
+          <p className="text-2xl font-bold text-pale skin-600">${product.price.toFixed(2)}</p>
           <Button 
             size="sm" 
-            className="bg-purple-600 hover:bg-purple-700"
+            className="bg-pale skin-600 hover:bg-pale skin-700"
             disabled={product.stock === 0}
             onClick={() => addToCart(product)}
           >

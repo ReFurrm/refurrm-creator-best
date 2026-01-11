@@ -17,9 +17,9 @@ export const OnboardingWelcome = ({ onStart }: OnboardingWelcomeProps) => {
       </div>
       
       <div className="space-y-4">
-        <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-100 dark:bg-purple-900/30 rounded-full">
-          <Sparkles className="w-4 h-4 text-purple-600" />
-          <span className="text-sm font-medium text-purple-600 dark:text-purple-400">
+        <div className="inline-flex items-center gap-2 px-4 py-2 bg-pale skin-100 dark:bg-pale skin-900/30 rounded-full">
+          <Sparkles className="w-4 h-4 text-pale skin-600" />
+          <span className="text-sm font-medium text-pale skin-600 dark:text-pale skin-400">
             Let's Get Started
           </span>
         </div>

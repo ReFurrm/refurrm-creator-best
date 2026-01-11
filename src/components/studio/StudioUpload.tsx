@@ -86,7 +86,7 @@ export default function StudioUpload() {
       <Card className="p-8">
         <div
           className={`border-2 border-dashed rounded-xl p-12 text-center transition-all ${
-            dragActive ? 'border-purple-500 bg-purple-50' : 'border-gray-300 bg-white'
+            dragActive ? 'border-pale skin-500 bg-pale skin-50' : 'border-gray-300 bg-white'
           }`}
           onDragEnter={handleDrag}
           onDragLeave={handleDrag}
@@ -160,7 +160,7 @@ export default function StudioUpload() {
         <Button 
           onClick={handleSubmit} 
           disabled={uploading || (files.length === 0 && !idea.trim())}
-          className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+          className="w-full bg-gradient-to-r from-pale skin-600 to-pink-600 hover:from-pale skin-700 hover:to-pink-700"
           size="lg"
         >
           {uploading ? (

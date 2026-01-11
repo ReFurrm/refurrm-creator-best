@@ -14,14 +14,14 @@ export function TrialBadge({ daysRemaining, variant = 'default', isVip }: TrialB
   if (isVip) {
     if (variant === 'compact') {
       return (
-        <Badge className="ml-2 bg-gradient-to-r from-purple-600 to-pink-600">
+        <Badge className="ml-2 bg-gradient-to-r from-pale skin-600 to-pink-600">
           <Crown className="w-3 h-3 mr-1" />
           VIP
         </Badge>
       );
     }
     return (
-      <Badge className="text-sm px-3 py-1 bg-gradient-to-r from-purple-600 to-pink-600">
+      <Badge className="text-sm px-3 py-1 bg-gradient-to-r from-pale skin-600 to-pink-600">
         <Crown className="w-4 h-4 mr-1.5" />
         VIP Premium
       </Badge>

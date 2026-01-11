@@ -43,7 +43,7 @@ export default function AIStyleAnalyzer({ referenceImages }: AIStyleAnalyzerProp
   if (referenceImages.length === 0) return null;
 
   return (
-    <Card className="p-6 bg-gradient-to-r from-blue-50 to-purple-50">
+    <Card className="p-6 bg-gradient-to-r from-blue-50 to-pale skin-50">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
           <Eye className="w-6 h-6 text-blue-600" />

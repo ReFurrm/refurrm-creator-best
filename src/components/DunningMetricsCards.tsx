@@ -21,8 +21,8 @@ export default function DunningMetricsCards() {
       title: 'Total Emails Sent',
       value: '1,247',
       icon: Mail,
-      color: 'text-purple-600',
-      bgColor: 'bg-purple-50'
+      color: 'text-pale skin-600',
+      bgColor: 'bg-pale skin-50'
     },
     {
       title: 'Revenue Recovered',

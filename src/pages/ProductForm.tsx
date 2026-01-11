@@ -216,7 +216,7 @@ export default function ProductForm() {
               </div>
 
 
-              <div className="flex items-center justify-between p-4 bg-purple-50 rounded-lg">
+              <div className="flex items-center justify-between p-4 bg-pale skin-50 rounded-lg">
                 <div>
                   <Label htmlFor="isSubscription" className="font-semibold">Recurring Subscription</Label>
                   <p className="text-sm text-gray-600">Charge customers on a recurring basis</p>
@@ -482,7 +482,7 @@ export default function ProductForm() {
             <Button type="button" variant="outline" onClick={() => navigate('/products')}>
               Cancel
             </Button>
-            <Button type="submit" className="bg-purple-600 hover:bg-purple-700">
+            <Button type="submit" className="bg-pale skin-600 hover:bg-pale skin-700">
               Create Product
             </Button>
           </div>

@@ -47,7 +47,7 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
 
   if (loading || checkingOnboarding) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-pale skin-900 to-slate-900">
         <Loader2 className="h-8 w-8 animate-spin text-white" />
       </div>
     );

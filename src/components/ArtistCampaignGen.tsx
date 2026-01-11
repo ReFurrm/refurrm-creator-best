@@ -126,7 +126,7 @@ export default function ArtistCampaignGen() {
           </div>
 
           {campaign.analysis && (
-            <Card className="p-4 bg-gradient-to-br from-blue-50 to-purple-50">
+            <Card className="p-4 bg-gradient-to-br from-blue-50 to-pale skin-50">
               <h3 className="font-bold mb-3 flex items-center justify-between">
                 AI Visual Analysis
                 <Button size="sm" variant="ghost" onClick={() => copyToClipboard(JSON.stringify(campaign.analysis), 'analysis')}>
@@ -135,7 +135,7 @@ export default function ArtistCampaignGen() {
               </h3>
               <div className="grid grid-cols-2 gap-3 text-sm">
                 <div><span className="font-semibold text-blue-600">Colors:</span> {campaign.analysis.colors?.join(', ')}</div>
-                <div><span className="font-semibold text-purple-600">Style:</span> {campaign.analysis.style}</div>
+                <div><span className="font-semibold text-pale skin-600">Style:</span> {campaign.analysis.style}</div>
                 <div><span className="font-semibold text-pink-600">Mood:</span> {campaign.analysis.mood}</div>
                 <div><span className="font-semibold text-indigo-600">Subject:</span> {campaign.analysis.subject}</div>
               </div>

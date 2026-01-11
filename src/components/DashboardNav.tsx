@@ -79,9 +79,9 @@ export default function DashboardNav() {
         <div className="flex justify-between h-16">
           <div className="flex items-center space-x-8">
             <Link to="/dashboard" className="flex items-center gap-2">
-              <h1 className="text-xl font-bold text-purple-600">ReFurrm Shops</h1>
+              <h1 className="text-xl font-bold text-pale skin-600">ReFurrm Shops</h1>
               {isVip && (
-                <span className="px-2 py-1 text-xs font-semibold bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full">
+                <span className="px-2 py-1 text-xs font-semibold bg-gradient-to-r from-pale skin-600 to-pink-600 text-white rounded-full">
                   VIP
                 </span>
               )}
@@ -96,7 +96,7 @@ export default function DashboardNav() {
                   to={item.path}
                   className={`flex items-center px-3 py-2 rounded-md text-sm font-medium transition ${
                     isActive(item.path)
-                      ? 'bg-purple-50 text-purple-700'
+                      ? 'bg-pale skin-50 text-pale skin-700'
                       : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                   }`}
                 >
@@ -109,7 +109,7 @@ export default function DashboardNav() {
 
           <div className="flex items-center space-x-4">
             <Link to="/premium">
-              <Button variant="outline" size="sm" className="border-purple-600 text-purple-600">
+              <Button variant="outline" size="sm" className="border-pale skin-600 text-pale skin-600">
                 <Crown className="w-4 h-4 mr-2" />
                 Premium
               </Button>
@@ -181,7 +181,7 @@ export default function DashboardNav() {
               to={item.path}
               className={`flex items-center px-3 py-2 rounded-md text-sm font-medium ${
                 isActive(item.path)
-                  ? 'bg-purple-50 text-purple-700'
+                  ? 'bg-pale skin-50 text-pale skin-700'
                   : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
               }`}
             >

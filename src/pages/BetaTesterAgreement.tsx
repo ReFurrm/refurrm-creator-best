@@ -47,8 +47,8 @@ export default function BetaTesterAgreement() {
               <p>Access may be revoked at any time.</p>
             </section>
 
-            <div className="bg-purple-50 border border-purple-200 rounded-lg p-4 mt-6">
-              <p className="font-semibold text-purple-900">
+            <div className="bg-pale skin-50 border border-pale skin-200 rounded-lg p-4 mt-6">
+              <p className="font-semibold text-pale skin-900">
                 Thank you for helping us build a better platform! Your feedback is invaluable.
               </p>
             </div>

@@ -105,7 +105,7 @@ export default function Dunning() {
 
                 <div className="bg-white rounded-lg shadow p-6">
                   <div className="flex items-center justify-between mb-2">
-                    <DollarSign className="w-8 h-8 text-purple-600" />
+                    <DollarSign className="w-8 h-8 text-pale skin-600" />
                   </div>
                   <p className="text-3xl font-bold text-slate-900">${stats.totalAtRisk}</p>
                   <p className="text-slate-600">At Risk MRR</p>

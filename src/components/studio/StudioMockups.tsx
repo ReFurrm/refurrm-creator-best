@@ -91,9 +91,9 @@ export default function StudioMockups() {
 
   return (
     <div className="max-w-7xl mx-auto space-y-6">
-      <Card className="p-6 bg-gradient-to-r from-purple-50 to-pink-50">
+      <Card className="p-6 bg-gradient-to-r from-pale skin-50 to-pink-50">
         <div className="flex items-start gap-4">
-          <Wand2 className="w-8 h-8 text-purple-600" />
+          <Wand2 className="w-8 h-8 text-pale skin-600" />
           <div>
             <h2 className="text-xl font-bold mb-2">AI Mockup Generator</h2>
             <p className="text-gray-600">Upload artwork and generate professional product mockups instantly.</p>

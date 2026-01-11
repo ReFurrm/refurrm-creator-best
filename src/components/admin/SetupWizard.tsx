@@ -6,7 +6,7 @@ import { Wand2, Music, GraduationCap, Briefcase, Palette } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const businessTypes = [
-  { id: 'artist', name: 'Artist/Musician', icon: Music, color: 'text-purple-500' },
+  { id: 'artist', name: 'Artist/Musician', icon: Music, color: 'text-pale skin-500' },
   { id: 'coach', name: 'Coach/Consultant', icon: GraduationCap, color: 'text-blue-500' },
   { id: 'creator', name: 'Content Creator', icon: Palette, color: 'text-pink-500' },
   { id: 'consultant', name: 'Business Consultant', icon: Briefcase, color: 'text-green-500' },

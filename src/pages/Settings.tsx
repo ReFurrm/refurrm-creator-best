@@ -212,19 +212,19 @@ export default function Settings() {
           )}
 
           {/* Test Mode Section */}
-          <div className="bg-gradient-to-r from-purple-50 to-indigo-50 border-2 border-purple-200 rounded-lg shadow p-6 mb-6">
+          <div className="bg-gradient-to-r from-pale skin-50 to-indigo-50 border-2 border-pale skin-200 rounded-lg shadow p-6 mb-6">
             <div className="flex items-start justify-between">
               <div className="flex-1">
-                <h3 className="text-xl font-semibold text-purple-900 mb-2 flex items-center gap-2">
+                <h3 className="text-xl font-semibold text-pale skin-900 mb-2 flex items-center gap-2">
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                   Test Premium Mode
                 </h3>
-                <p className="text-purple-700 text-sm mb-4">
+                <p className="text-pale skin-700 text-sm mb-4">
                   Enable test mode to access all premium features without a subscription. Perfect for testing and development.
                 </p>
-                <div className="bg-white/50 rounded-lg p-3 text-xs text-purple-800 mb-4">
+                <div className="bg-white/50 rounded-lg p-3 text-xs text-pale skin-800 mb-4">
                   <strong>When enabled:</strong> All premium content and features will be accessible, subscription checks will be bypassed.
                 </div>
               </div>
@@ -238,11 +238,11 @@ export default function Settings() {
                   }}
                   className="sr-only peer"
                 />
-                <div className="w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-purple-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-purple-600"></div>
+                <div className="w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-pale skin-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-pale skin-600"></div>
               </label>
             </div>
             {testMode && (
-              <div className="mt-4 bg-purple-100 border border-purple-300 rounded-lg p-3 text-sm text-purple-900">
+              <div className="mt-4 bg-pale skin-100 border border-pale skin-300 rounded-lg p-3 text-sm text-pale skin-900">
                 <strong>Test Mode Active:</strong> You now have full access to all premium features!
               </div>
             )}
@@ -282,7 +282,7 @@ export default function Settings() {
               <button
                 type="submit"
                 disabled={loading}
-                className="px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700 transition"
+                className="px-6 py-3 bg-pale skin-600 text-white rounded-lg font-semibold hover:bg-pale skin-700 transition"
               >
                 Save Profile
               </button>
@@ -341,7 +341,7 @@ export default function Settings() {
               <button
                 type="submit"
                 disabled={loading}
-                className="px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700 transition"
+                className="px-6 py-3 bg-pale skin-600 text-white rounded-lg font-semibold hover:bg-pale skin-700 transition"
               >
                 Save Shop Settings
               </button>

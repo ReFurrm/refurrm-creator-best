@@ -77,7 +77,7 @@ export default function Onboarding() {
 
   if (currentStep === STEPS.length) {
     return (
-      <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-purple-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
+      <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-pale skin-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
         <Card className="w-full max-w-2xl p-8 text-center space-y-6">
           <img 
             src="https://d64gsuwffb70l.cloudfront.net/6924b1f0076ff3ce4a9b699a_1764042313486_922a051f.webp" 
@@ -98,7 +98,7 @@ export default function Onboarding() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 p-4">
+    <div className="min-h-screen bg-gradient-to-br from-pale skin-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 p-4">
       <div className="max-w-4xl mx-auto py-8">
         {started && (
           <div className="mb-6 space-y-4">

@@ -66,7 +66,7 @@ export default function Pricing() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-pale skin-50 via-white to-blue-50">
       <div className="max-w-7xl mx-auto px-4 py-16">
         <div className="text-center mb-12">
           <Badge className="mb-4 bg-green-500 text-white px-4 py-1 text-sm">
@@ -90,18 +90,18 @@ export default function Pricing() {
               <div
                 key={plan.name}
                 className={`relative bg-white rounded-2xl shadow-xl p-8 ${
-                  plan.popular ? 'ring-4 ring-purple-600 scale-105' : ''
+                  plan.popular ? 'ring-4 ring-pale skin-600 scale-105' : ''
                 }`}
               >
                 {plan.popular && (
-                  <Badge className="absolute -top-4 left-1/2 -translate-x-1/2 bg-purple-600 text-white px-4 py-1">
+                  <Badge className="absolute -top-4 left-1/2 -translate-x-1/2 bg-pale skin-600 text-white px-4 py-1">
                     Most Popular
                   </Badge>
                 )}
                 
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="p-3 bg-purple-100 rounded-lg">
-                    <Icon className="w-6 h-6 text-purple-600" />
+                  <div className="p-3 bg-pale skin-100 rounded-lg">
+                    <Icon className="w-6 h-6 text-pale skin-600" />
                   </div>
                   <h3 className="text-2xl font-bold text-slate-900">{plan.name}</h3>
                 </div>
@@ -119,7 +119,7 @@ export default function Pricing() {
                   onClick={() => handleSelectPlan(plan.name)}
                   className={`w-full py-6 text-lg font-semibold ${
                     plan.popular
-                      ? 'bg-purple-600 hover:bg-purple-700'
+                      ? 'bg-pale skin-600 hover:bg-pale skin-700'
                       : 'bg-slate-900 hover:bg-slate-800'
                   }`}
                 >

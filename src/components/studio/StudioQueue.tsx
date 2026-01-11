@@ -47,7 +47,7 @@ export default function StudioQueue() {
   if (loading) {
     return (
       <div className="flex justify-center items-center py-12">
-        <Loader2 className="h-8 w-8 animate-spin text-purple-600" />
+        <Loader2 className="h-8 w-8 animate-spin text-pale skin-600" />
       </div>
     );
   }
@@ -81,7 +81,7 @@ export default function StudioQueue() {
               <p className="text-sm text-gray-600">{item.idea_description}</p>
             </div>
             {item.status === 'ready' && (
-              <Button size="sm" className="bg-purple-600 hover:bg-purple-700">
+              <Button size="sm" className="bg-pale skin-600 hover:bg-pale skin-700">
                 <Eye className="mr-2 h-4 w-4" />
                 Review & Publish
               </Button>
@@ -92,7 +92,7 @@ export default function StudioQueue() {
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600">AI is working...</span>
-                <span className="text-purple-600 font-medium">{item.progress || 45}%</span>
+                <span className="text-pale skin-600 font-medium">{item.progress || 45}%</span>
               </div>
               <Progress value={item.progress || 45} className="h-2" />
               <p className="text-xs text-gray-500">
