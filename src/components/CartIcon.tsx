@@ -9,7 +9,7 @@ export default function CartIcon() {
     <Button
       variant="ghost"
       size="icon"
-      className="relative text-white hover:text-purple-300"
+      className="relative text-slate-700 hover:text-purple-600"
       onClick={openCart}
     >
       <ShoppingCart className="h-6 w-6" />

@@ -7,25 +7,25 @@ export default function CCPA() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 p-6">
+    <div className="min-h-screen bg-[#EDDACE] p-6">
       <div className="max-w-4xl mx-auto">
-        <Button variant="ghost" onClick={() => navigate(-1)} className="mb-6">
+        <Button variant="ghost" onClick={() => navigate(-1)} className="mb-6 text-[#5C4033]">
           <ArrowLeft className="h-4 w-4 mr-2" />
           Back
         </Button>
 
         <Card className="p-8">
-          <h1 className="text-3xl font-bold mb-2">CCPA Notice</h1>
-          <p className="text-sm text-muted-foreground mb-2">California Consumer Privacy Act</p>
-          <p className="text-sm text-muted-foreground mb-8">Applies to California residents</p>
+          <h1 className="text-3xl font-bold mb-2 text-[#5C4033]">CCPA Notice</h1>
+          <p className="text-sm text-[#8B7355] mb-2">California Consumer Privacy Act</p>
+          <p className="text-sm text-[#8B7355] mb-8">Applies to California residents</p>
 
           <div className="space-y-6 prose prose-sm max-w-none">
-            <p>This notice supplements the ReFURRM Ai Studio Privacy Policy.</p>
+            <p className="text-[#5C4033]">This notice supplements the ReFURRM Ai Studio Privacy Policy.</p>
 
             <section>
-              <h2 className="text-xl font-semibold mb-3">1. Your Rights Under CCPA</h2>
-              <p>California users have the right to:</p>
-              <ul className="list-disc pl-6 space-y-1">
+              <h2 className="text-xl font-semibold mb-3 text-[#5C4033]">1. Your Rights Under CCPA</h2>
+              <p className="text-[#5C4033]">California users have the right to:</p>
+              <ul className="list-disc pl-6 space-y-1 text-[#5C4033]">
                 <li>request the categories of personal data collected</li>
                 <li>request deletion of personal data</li>
                 <li>request the specific pieces of data collected</li>
@@ -36,9 +36,9 @@ export default function CCPA() {
             </section>
 
             <section>
-              <h2 className="text-xl font-semibold mb-3">2. Categories of Data Collected</h2>
-              <p>We may collect:</p>
-              <ul className="list-disc pl-6 space-y-1">
+              <h2 className="text-xl font-semibold mb-3 text-[#5C4033]">2. Categories of Data Collected</h2>
+              <p className="text-[#5C4033]">We may collect:</p>
+              <ul className="list-disc pl-6 space-y-1 text-[#5C4033]">
                 <li>identifiers (name, email)</li>
                 <li>commercial information (subscriptions, product activity)</li>
                 <li>internet activity (usage logs)</li>
@@ -48,21 +48,21 @@ export default function CCPA() {
             </section>
 
             <section>
-              <h2 className="text-xl font-semibold mb-3">3. Data Sharing</h2>
-              <p>We may share data with service providers such as:</p>
-              <ul className="list-disc pl-6 space-y-1">
+              <h2 className="text-xl font-semibold mb-3 text-[#5C4033]">3. Data Sharing</h2>
+              <p className="text-[#5C4033]">We may share data with service providers such as:</p>
+              <ul className="list-disc pl-6 space-y-1 text-[#5C4033]">
                 <li>Supabase</li>
                 <li>Stripe</li>
                 <li>Email service providers</li>
                 <li>Analytics platforms</li>
               </ul>
-              <p className="mt-2 font-semibold">We do not sell personal data.</p>
+              <p className="mt-2 font-semibold text-[#C24C1A]">We do not sell personal data.</p>
             </section>
 
             <section>
-              <h2 className="text-xl font-semibold mb-3">4. Requests</h2>
-              <p>Users may submit a CCPA request through support. We may verify identity before fulfilling requests.</p>
-              <p className="mt-2">Contact: support@refurrm.app | 479.446.6201</p>
+              <h2 className="text-xl font-semibold mb-3 text-[#5C4033]">4. Requests</h2>
+              <p className="text-[#5C4033]">Users may submit a CCPA request through support. We may verify identity before fulfilling requests.</p>
+              <p className="mt-2 text-[#5C4033]">Contact: support@refurrm.app | 479.446.6201</p>
             </section>
           </div>
         </Card>

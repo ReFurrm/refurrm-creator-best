@@ -2,6 +2,13 @@ import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/contexts/AuthContext';
 import DashboardNav from '@/components/DashboardNav';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { Badge } from '@/components/ui/badge';
+import RichTextEditor from '@/components/RichTextEditor';
 import AIEmailGenerator from '@/components/AIEmailGenerator';
 import { Sparkles } from 'lucide-react';
 
@@ -12,6 +19,7 @@ export default function Emails() {
   const [showCompose, setShowCompose] = useState(false);
   const [showAI, setShowAI] = useState(false);
   const [email, setEmail] = useState({ subject: '', body: '' });
+  const [editorContent, setEditorContent] = useState('');
 
 
   useEffect(() => {
@@ -41,7 +49,7 @@ export default function Emails() {
   };
 
   const sendBroadcast = async () => {
-    if (!email.subject || !email.body) {
+    if (!email.subject || !editorContent) {
       alert('Please fill in subject and body');
       return;
     }
@@ -50,6 +58,7 @@ export default function Emails() {
     alert(`Email broadcast sent to ${subscribers.length} subscribers!`);
     setShowCompose(false);
     setEmail({ subject: '', body: '' });
+    setEditorContent('');
   };
 
   return (
@@ -59,87 +68,91 @@ export default function Emails() {
       <div className="flex-1 p-8">
         <div className="max-w-6xl mx-auto">
           <div className="flex justify-between items-center mb-8">
-            <h2 className="text-3xl font-bold text-slate-900">Email Subscribers</h2>
-            <button
+            <CardTitle className="text-3xl">Email Subscribers</CardTitle>
+            <Button
               onClick={() => setShowCompose(!showCompose)}
-              className="px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700 transition"
             >
               {showCompose ? 'Cancel' : 'Send Broadcast'}
-            </button>
+            </Button>
           </div>
 
           {showCompose && (
-            <div className="bg-white rounded-lg shadow p-6 mb-6">
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="text-xl font-semibold text-slate-900">Compose Email</h3>
-                <button onClick={() => setShowAI(true)} className="flex items-center gap-2 px-4 py-2 text-purple-600 border border-purple-600 rounded-lg hover:bg-purple-50">
-                  <Sparkles className="w-4 h-4" />
-                  AI Generate
-                </button>
-              </div>
-
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">Subject</label>
-                  <input
-                    type="text"
-                    value={email.subject}
-                    onChange={(e) => setEmail({ ...email, subject: e.target.value })}
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg"
-                  />
+            <Card className="mb-6">
+              <CardHeader>
+                <div className="flex justify-between items-center">
+                  <CardTitle>Compose Email</CardTitle>
+                  <Button onClick={() => setShowAI(true)} variant="outline">
+                    <Sparkles className="w-4 h-4 mr-2" />
+                    AI Generate
+                  </Button>
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">Body</label>
-                  <textarea
-                    value={email.body}
-                    onChange={(e) => setEmail({ ...email, body: e.target.value })}
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg h-48"
-                  />
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div>
+                    <Label>Subject</Label>
+                    <Input
+                      type="text"
+                      value={email.subject}
+                      onChange={(e) => setEmail({ ...email, subject: e.target.value })}
+                    />
+                  </div>
+                  <div>
+                    <Label>Body</Label>
+                    <RichTextEditor
+                      value={editorContent}
+                      onChange={setEditorContent}
+                    />
+                  </div>
+                  <Button
+                    onClick={sendBroadcast}
+                  >
+                    Send to {subscribers.length} Subscribers
+                  </Button>
                 </div>
-                <button
-                  onClick={sendBroadcast}
-                  className="px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700 transition"
-                >
-                  Send to {subscribers.length} Subscribers
-                </button>
-              </div>
-            </div>
+              </CardContent>
+            </Card>
           )}
 
           {loading ? (
             <p className="text-slate-600">Loading subscribers...</p>
           ) : (
-            <div className="bg-white rounded-lg shadow">
-              <div className="p-6 border-b border-slate-200">
-                <p className="text-slate-600">
-                  <strong>{subscribers.length}</strong> total subscribers
-                  {' '}({subscribers.filter(s => s.is_buyer).length} buyers)
+            <Card>
+              <CardHeader>
+                <CardTitle>{subscribers.length} total subscribers</CardTitle>
+                <p className="text-sm text-slate-600">
+                  {subscribers.filter(s => s.is_buyer).length} buyers
                 </p>
-              </div>
-              <div className="divide-y divide-slate-200">
-                {subscribers.map(subscriber => (
-                  <div key={subscriber.id} className="p-4 flex justify-between items-center">
-                    <div>
-                      <p className="font-medium text-slate-900">{subscriber.email}</p>
-                      {subscriber.name && (
-                        <p className="text-sm text-slate-600">{subscriber.name}</p>
-                      )}
+              </CardHeader>
+              <CardContent>
+                <div className="divide-y divide-slate-200">
+                  {subscribers.map(subscriber => (
+                    <div key={subscriber.id} className="py-4 flex justify-between items-center">
+                      <div>
+                        <p className="font-medium text-slate-900">{subscriber.email}</p>
+                        {subscriber.name && (
+                          <p className="text-sm text-slate-600">{subscriber.name}</p>
+                        )}
+                      </div>
+                      <div className="flex gap-2 items-center">
+                        {subscriber.is_buyer && (
+                          <Badge variant="secondary">Buyer</Badge>
+                        )}
+                        <span className="text-sm text-slate-500">
+                          {new Date(subscriber.subscribed_at).toLocaleDateString()}
+                        </span>
+                      </div>
                     </div>
-                    <div className="flex gap-2">
-                      {subscriber.is_buyer && (
-                        <span className="px-2 py-1 bg-green-100 text-green-700 text-xs rounded">Buyer</span>
-                      )}
-                      <span className="text-sm text-slate-500">
-                        {new Date(subscriber.subscribed_at).toLocaleDateString()}
-                      </span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
           )}
         </div>
-        <AIEmailGenerator open={showAI} onClose={() => setShowAI(false)} onApply={(data) => setEmail({ subject: data.subjectLines?.[0] || '', body: data.emailBody || '' })} />
+        <AIEmailGenerator open={showAI} onClose={() => setShowAI(false)} onApply={(data) => {
+          setEmail({ ...email, subject: data.subjectLines?.[0] || '' });
+          setEditorContent(data.emailBody || '');
+        }} />
       </div>
     </div>
   );

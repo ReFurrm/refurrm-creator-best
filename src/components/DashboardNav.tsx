@@ -32,6 +32,8 @@ export default function DashboardNav() {
     { path: '/dm-campaigns', label: 'DM Campaigns', icon: MessageSquare },
     { path: '/emails', label: 'Emails', icon: Mail },
     { path: '/integrations', label: 'Integrations', icon: Plug },
+    { path: '/community', label: 'Community', icon: MessageSquare },
+    { path: '/marketplace', label: 'Marketplace', icon: Store },
   ];
 
   const handleSignOut = async () => {
