@@ -17,9 +17,6 @@ import ResetPassword from '@/pages/ResetPassword';
 import CustomerSupport from '@/pages/CustomerSupport';
 import NotFound from '@/pages/NotFound';
 
-
-
-
 import './App.css';
 
 const Dashboard = lazy(() => import('@/pages/Dashboard'));
@@ -96,7 +93,7 @@ function App() {
 
           <Router>
             <Suspense fallback={<RouteFallback />}>
-            <Routes>
+              <Routes>
               {/* Public routes */}
               <Route path="/" element={<Index />} />
               <Route path="/health" element={<Health />} />
@@ -189,7 +186,7 @@ function App() {
               
               {/* Catch all */}
               <Route path="*" element={<NotFound />} />
-            </Routes>
+              </Routes>
             </Suspense>
             <CustomerSupport />
             <Toaster />

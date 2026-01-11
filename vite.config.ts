@@ -17,5 +17,34 @@ export default defineConfig(() => ({
   build: {
     outDir: "build",
     sourcemap: true,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (!id.includes("node_modules")) return;
+          if (id.includes("react") || id.includes("react-dom") || id.includes("scheduler")) {
+            return "react-vendor";
+          }
+          if (id.includes("react-router")) {
+            return "router";
+          }
+          if (id.includes("@supabase")) {
+            return "supabase";
+          }
+          if (
+            id.includes("@radix-ui") ||
+            id.includes("lucide-react") ||
+            id.includes("class-variance-authority") ||
+            id.includes("clsx") ||
+            id.includes("tailwind-merge")
+          ) {
+            return "ui-vendor";
+          }
+          if (id.includes("marked")) {
+            return "markdown";
+          }
+          return "vendor";
+        },
+      },
+    },
   },
 }));
