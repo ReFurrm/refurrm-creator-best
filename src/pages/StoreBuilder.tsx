@@ -26,6 +26,7 @@ export default function StoreBuilder() {
     store_description: '',
     store_url: '',
     logo_url: '',
+    custom_domain: '',
     primary_color: '#6366f1',
     secondary_color: '#8b5cf6',
     currency: 'USD',

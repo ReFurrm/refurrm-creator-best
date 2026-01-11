@@ -3,13 +3,11 @@ import { Button } from '@/components/ui/button';
 import { 
   LayoutDashboard, Package, Calendar, BarChart3, 
   MessageSquare, Mail, Settings, CreditCard, 
-  LogOut, Store, Plug, User, Crown, AlertTriangle, Headphones, Shield, Users, Layers
+  LogOut, Store, Plug, User, Crown, AlertTriangle, Headphones
 } from 'lucide-react';
 
 
 
-import { useState, useEffect } from 'react';
-import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/contexts/AuthContext';
 import {
   DropdownMenu,
@@ -21,48 +19,22 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-
 export default function DashboardNav() {
   const location = useLocation();
   const navigate = useNavigate();
   const { user, signOut } = useAuth();
-  const [isVip, setIsVip] = useState(false);
-
-  useEffect(() => {
-    if (user) {
-      loadVipStatus();
-    }
-  }, [user]);
-
-  const loadVipStatus = async () => {
-    const { data } = await supabase
-      .from('subscriptions')
-      .select('is_vip')
-      .eq('user_id', user?.id)
-      .single();
-
-    if (data?.is_vip) {
-      setIsVip(true);
-    }
-  };
-
-
-
 
   const navItems = [
     { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-    { path: '/studio', label: 'Studio', icon: Store },
     { path: '/products', label: 'Products', icon: Package },
-    { path: '/collections', label: 'Collections', icon: Layers },
-    { path: '/inventory', label: 'Inventory', icon: Package },
-    { path: '/orders', label: 'Orders', icon: Calendar },
+    { path: '/bookings', label: 'Bookings', icon: Calendar },
     { path: '/analytics', label: 'Analytics', icon: BarChart3 },
+    { path: '/dm-campaigns', label: 'DM Campaigns', icon: MessageSquare },
     { path: '/emails', label: 'Emails', icon: Mail },
+    { path: '/integrations', label: 'Integrations', icon: Plug },
+    { path: '/community', label: 'Community', icon: MessageSquare },
+    { path: '/marketplace', label: 'Marketplace', icon: Store },
   ];
-
-
-
-
 
   const handleSignOut = async () => {
     await signOut();
@@ -76,17 +48,10 @@ export default function DashboardNav() {
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between h-16">
           <div className="flex items-center space-x-8">
-            <Link to="/dashboard" className="flex items-center gap-2">
+            <Link to="/dashboard" className="flex items-center">
               <h1 className="text-xl font-bold text-purple-600">ReFurrm Shops</h1>
-              {isVip && (
-                <span className="px-2 py-1 text-xs font-semibold bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full">
-                  VIP
-                </span>
-              )}
             </Link>
-
-
-
+            
             <div className="hidden md:flex space-x-1">
               {navItems.map(item => (
                 <Link
@@ -151,11 +116,6 @@ export default function DashboardNav() {
                   <Headphones className="mr-2 h-4 w-4" />
                   Support Admin
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => navigate('/admin')}>
-                  <Shield className="mr-2 h-4 w-4" />
-                  Admin Panel
-                </DropdownMenuItem>
-
 
 
 

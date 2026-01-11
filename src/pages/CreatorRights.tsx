@@ -2,15 +2,17 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Download, Shield, DollarSign, Lock, Eye, FileText } from 'lucide-react';
 import LegalDocumentGenerator from '@/components/LegalDocumentGenerator';
+import { useAuth } from '@/contexts/AuthContext';
 import { generateCreatorRightsPDF } from '@/lib/pdfGenerator';
 
 export default function CreatorRights() {
+  const { user } = useAuth();
+
   const handleDownloadPDF = () => {
-    // Quick download with default info
     generateCreatorRightsPDF({
-      businessName: 'Your Business',
-      creatorName: 'Creator',
-      email: '',
+      businessName: user?.user_metadata.name || 'Your Business',
+      creatorName: user?.user_metadata.name || 'Creator',
+      email: user?.email || '',
       effectiveDate: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
     });
   };

@@ -36,21 +36,21 @@ export default function Profile() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <div className="min-h-screen bg-[#EDDACE]">
       <DashboardNav />
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-white mb-2">My Profile</h1>
-          <p className="text-purple-200">{user?.email}</p>
+          <h1 className="text-3xl font-bold text-[#5C4033] mb-2">My Profile</h1>
+          <p className="text-[#1E8D70]">{user?.email}</p>
         </div>
 
         <Tabs defaultValue="campaigns" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 max-w-md">
-            <TabsTrigger value="campaigns">
+          <TabsList className="grid w-full grid-cols-2 max-w-md bg-[#1E8D70]/20">
+            <TabsTrigger value="campaigns" className="data-[state=active]:bg-[#C24C1A] data-[state=active]:text-white">
               <Palette className="mr-2 h-4 w-4" />
               Campaigns ({campaigns.length})
             </TabsTrigger>
-            <TabsTrigger value="stores">
+            <TabsTrigger value="stores" className="data-[state=active]:bg-[#C24C1A] data-[state=active]:text-white">
               <Store className="mr-2 h-4 w-4" />
               Stores ({stores.length})
             </TabsTrigger>

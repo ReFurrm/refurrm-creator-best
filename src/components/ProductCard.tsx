@@ -2,6 +2,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ShoppingCart } from 'lucide-react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useCart } from '@/contexts/CartContext';
 
 interface ProductCardProps {
@@ -31,6 +32,13 @@ export default function ProductCard({ product }: ProductCardProps) {
         )}
       </div>
       <CardContent className="p-4">
+        <div className="flex items-center gap-2 mb-2">
+          <Avatar className="w-6 h-6">
+            <AvatarImage src={product.user.avatar_url} />
+            <AvatarFallback>{product.user.username.charAt(0)}</AvatarFallback>
+          </Avatar>
+          <p className="text-sm font-medium">{product.user.username}</p>
+        </div>
         <Badge variant="outline" className="mb-2">{product.category}</Badge>
         <h3 className="font-semibold text-lg mb-1 line-clamp-1">{product.name}</h3>
         <p className="text-sm text-gray-600 mb-3 line-clamp-2">{product.description}</p>

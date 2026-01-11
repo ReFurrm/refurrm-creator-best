@@ -39,10 +39,10 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-[#EDDACE] via-[#C24C1A]/10 to-[#1E8D70]/20 flex items-center justify-center p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-bold">Welcome Back</CardTitle>
+          <CardTitle className="text-2xl font-bold text-[#5C4033]">Welcome Back</CardTitle>
           <CardDescription>
             Sign in to your ReFurrm Shops account
           </CardDescription>
@@ -50,7 +50,7 @@ export default function Login() {
         <form onSubmit={handleSubmit}>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email" className="text-[#5C4033]">Email</Label>
               <Input
                 id="email"
                 type="email"
@@ -61,7 +61,7 @@ export default function Login() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password" className="text-[#5C4033]">Password</Label>
               <Input
                 id="password"
                 type="password"
@@ -74,7 +74,7 @@ export default function Login() {
             <div className="text-right">
               <Link 
                 to="/reset-password" 
-                className="text-sm text-purple-600 hover:underline"
+                className="text-sm text-[#C24C1A] hover:underline"
               >
                 Forgot password?
               </Link>
@@ -83,7 +83,7 @@ export default function Login() {
           <CardFooter className="flex flex-col gap-4">
             <Button 
               type="submit" 
-              className="w-full bg-purple-600 hover:bg-purple-700"
+              className="w-full bg-[#C24C1A] hover:bg-[#A63D14]"
               disabled={loading}
             >
               {loading ? (
@@ -97,7 +97,7 @@ export default function Login() {
             </Button>
             <p className="text-sm text-center text-muted-foreground">
               Don't have an account?{' '}
-              <Link to="/signup" className="text-purple-600 hover:underline">
+              <Link to="/signup" className="text-[#C24C1A] hover:underline">
                 Start free trial
               </Link>
             </p>
