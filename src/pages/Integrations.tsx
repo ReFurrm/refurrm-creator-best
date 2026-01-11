@@ -51,6 +51,13 @@ export default function Integrations() {
       status: integrations.instagram?.connected ? 'Connected' : 'Not Connected'
     },
     {
+      type: 'facebook',
+      name: 'Facebook',
+      description: 'Sync your Facebook Page to schedule posts and track engagement.',
+      icon: '📘',
+      status: integrations.facebook?.connected ? 'Connected' : 'Not Connected'
+    },
+    {
       type: 'shopify',
       name: 'Shopify',
       description: 'Import products from your Shopify store and sync inventory automatically.',
