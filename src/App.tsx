@@ -1,21 +1,59 @@
 import { lazy, Suspense } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from '@/contexts/AuthContext';
-import { CartProvider } from '@/contexts/CartContext';
 import { AppProvider } from '@/contexts/AppContext';
-import { ErrorBoundary } from '@/components/ErrorBoundary';
-
 import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/toaster';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import { AdminRoute } from '@/components/AdminRoute';
 
+import './App.css';
+
+// Loading fallback component
+const LoadingFallback = () => (
+  <div className="min-h-screen flex items-center justify-center bg-gray-50">
+    <div className="text-center space-y-4">
+      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+      <p className="text-gray-600">Loading...</p>
+    </div>
+  </div>
+);
+
+// Lazy load all page components
+const Index = lazy(() => import('@/pages/Index'));
+const Login = lazy(() => import('@/pages/Login'));
+const Signup = lazy(() => import('@/pages/Signup'));
+const ResetPassword = lazy(() => import('@/pages/ResetPassword'));
 import Index from '@/pages/Index';
 import Login from '@/pages/Login';
 import Signup from '@/pages/Signup';
 import ResetPassword from '@/pages/ResetPassword';
+import Dashboard from '@/pages/Dashboard';
+import Products from '@/pages/Products';
+import ProductForm from '@/pages/ProductForm';
+import Storefront from '@/pages/Storefront';
+import Checkout from '@/pages/Checkout';
+import Success from '@/pages/Success';
+import Onboarding from '@/pages/Onboarding';
+import Emails from '@/pages/Emails';
+import DMCampaigns from '@/pages/DMCampaigns';
+import Analytics from '@/pages/Analytics';
+import Settings from '@/pages/Settings';
+import Integrations from '@/pages/Integrations';
+import Bookings from '@/pages/Bookings';
+import Billing from '@/pages/Billing';
+import Subscriptions from '@/pages/Subscriptions';
+import PremiumContent from '@/pages/PremiumContent';
+import Dunning from '@/pages/Dunning';
+import Profile from '@/pages/Profile';
 import CustomerSupport from '@/pages/CustomerSupport';
 import NotFound from '@/pages/NotFound';
+
+
+import './App.css';
+
+function App() {
 
 import './App.css';
 
@@ -39,6 +77,9 @@ const Subscriptions = lazy(() => import('@/pages/Subscriptions'));
 const PremiumContent = lazy(() => import('@/pages/PremiumContent'));
 const Dunning = lazy(() => import('@/pages/Dunning'));
 const Profile = lazy(() => import('@/pages/Profile'));
+const CustomerSupport = lazy(() => import('@/pages/CustomerSupport'));
+const SupportAdmin = lazy(() => import('@/pages/SupportAdmin'));
+const NotFound = lazy(() => import('@/pages/NotFound'));
 const SupportAdmin = lazy(() => import('@/pages/SupportAdmin'));
 const Admin = lazy(() => import('@/pages/Admin'));
 const Pricing = lazy(() => import('@/pages/Pricing'));
@@ -73,6 +114,8 @@ const Collections = lazy(() => import('@/pages/Collections'));
 const CollectionStorefront = lazy(() => import('@/pages/CollectionStorefront'));
 const SocialMediaAnalytics = lazy(() => import('@/pages/SocialMediaAnalytics'));
 const CreatorRights = lazy(() => import('@/pages/CreatorRights'));
+
+
 const Community = lazy(() => import('@/pages/Community'));
 const Marketplace = lazy(() => import('@/pages/Marketplace'));
 
@@ -85,47 +128,22 @@ const RouteFallback = () => (
 function App() {
   
   return (
-    <ErrorBoundary>
     <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
       <AuthProvider>
-        <CartProvider>
-          <AppProvider>
-
+        <AppProvider>
           <Router>
+            <Suspense fallback={<LoadingFallback />}>
+            <Routes>
             <Suspense fallback={<RouteFallback />}>
               <Routes>
               {/* Public routes */}
               <Route path="/" element={<Index />} />
-              <Route path="/health" element={<Health />} />
-              <Route path="/pricing" element={<Pricing />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/reset-password" element={<ResetPassword />} />
               <Route path="/shop/:username" element={<Storefront />} />
-              <Route path="/collection/:slug" element={<CollectionStorefront />} />
               <Route path="/checkout/:productId" element={<Checkout />} />
               <Route path="/success" element={<Success />} />
-
-              <Route path="/affiliate-signup" element={<AffiliateSignup />} />
-              <Route path="/terms" element={<Terms />} />
-              <Route path="/privacy" element={<Privacy />} />
-              <Route path="/ccpa" element={<CCPA />} />
-              <Route path="/dpa" element={<DPA />} />
-
-              <Route path="/refund" element={<Refund />} />
-              <Route path="/aup" element={<AUP />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/eula" element={<EULA />} />
-              <Route path="/community-guidelines" element={<CommunityGuidelines />} />
-              <Route path="/merchant-guidelines" element={<MerchantGuidelines />} />
-              <Route path="/ai-output-safety" element={<AIOutputSafety />} />
-              <Route path="/beta-tester-agreement" element={<BetaTesterAgreement />} />
-              <Route path="/cookie-policy" element={<CookiePolicy />} />
-              <Route path="/creator-rights" element={<CreatorRights />} />
-              <Route path="/blog" element={<Blog />} />
-
-
-
               
               {/* Protected routes */}
               <Route path="/onboarding" element={<ProtectedRoute><Onboarding /></ProtectedRoute>} />
@@ -136,16 +154,6 @@ function App() {
               <Route path="/products/:id" element={<ProtectedRoute><ProductForm /></ProtectedRoute>} />
               <Route path="/products/:id/edit" element={<ProtectedRoute><ProductForm /></ProtectedRoute>} />
               <Route path="/storefront" element={<ProtectedRoute><Storefront /></ProtectedRoute>} />
-              <Route path="/store-builder" element={<ProtectedRoute><StoreBuilder /></ProtectedRoute>} />
-              <Route path="/studio" element={<ProtectedRoute><Studio /></ProtectedRoute>} />
-              <Route path="/collections" element={<ProtectedRoute><Collections /></ProtectedRoute>} />
-
-
-              <Route path="/inventory" element={<ProtectedRoute><Inventory /></ProtectedRoute>} />
-              <Route path="/orders" element={<ProtectedRoute><Orders /></ProtectedRoute>} />
-              <Route path="/checkout" element={<Checkout />} />
-
-
               <Route path="/subscriptions" element={<ProtectedRoute><Subscriptions /></ProtectedRoute>} />
               <Route path="/premium" element={<ProtectedRoute><PremiumContent /></ProtectedRoute>} />
               <Route path="/bookings" element={<ProtectedRoute><Bookings /></ProtectedRoute>} />
@@ -186,16 +194,16 @@ function App() {
               
               {/* Catch all */}
               <Route path="*" element={<NotFound />} />
+            </Routes>
               </Routes>
             </Suspense>
             <CustomerSupport />
             <Toaster />
+
           </Router>
-          </AppProvider>
-        </CartProvider>
+        </AppProvider>
       </AuthProvider>
     </ThemeProvider>
-    </ErrorBoundary>
   );
 }
 

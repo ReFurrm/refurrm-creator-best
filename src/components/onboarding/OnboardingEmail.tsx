@@ -48,12 +48,18 @@ export const OnboardingEmail = ({ onNext, onSkip }: OnboardingEmailProps) => {
       }, { onConflict: 'user_id' });
 
     setLoading(false);
-    if (profileError || settingsError) {
+    if (profileError) {
       toast.error('Failed to save email settings');
-    } else {
-      toast.success('Email settings saved!');
-      onNext();
+      return;
     }
+    if (settingsError) {
+      toast.warning('Email preferences saved partially. You can finish this in Settings.');
+      onNext();
+      return;
+    }
+
+    toast.success('Email settings saved!');
+    onNext();
   };
 
 

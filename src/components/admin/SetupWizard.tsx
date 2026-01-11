@@ -2,11 +2,12 @@ import { useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { Wand2, Music, GraduationCap, Briefcase, Palette } from 'lucide-react';
+import { Wand2, Music, GraduationCap, Briefcase, Palette, Rocket } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const businessTypes = [
   { id: 'artist', name: 'Artist/Musician', icon: Music, color: 'text-purple-500' },
+  { id: 'entrepreneur', name: 'Entrepreneur', icon: Rocket, color: 'text-orange-500' },
   { id: 'coach', name: 'Coach/Consultant', icon: GraduationCap, color: 'text-blue-500' },
   { id: 'creator', name: 'Content Creator', icon: Palette, color: 'text-pink-500' },
   { id: 'consultant', name: 'Business Consultant', icon: Briefcase, color: 'text-green-500' },

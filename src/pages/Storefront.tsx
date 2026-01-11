@@ -1,171 +1,90 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import { supabase } from '@/lib/supabase';
-import ProductFilters from '@/components/ProductFilters';
-import ActiveFilters from '@/components/ActiveFilters';
-import ProductCard from '@/components/ProductCard';
-import { Layers } from 'lucide-react';
+import { Crown, Lock } from 'lucide-react';
+import { useSubscription } from '@/hooks/useSubscription';
 
 export default function Storefront() {
   const [products, setProducts] = useState<any[]>([]);
-  const [collections, setCollections] = useState<any[]>([]);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 1000]);
-  const [sortBy, setSortBy] = useState('newest');
-  const [maxPrice, setMaxPrice] = useState(1000);
-
+  const { hasAccessToProduct } = useSubscription();
 
   useEffect(() => {
     fetchProducts();
-    fetchCollections();
   }, []);
-
-  const fetchCollections = async () => {
-    const { data } = await supabase
-      .from('collections')
-      .select('*, collection_products(count)')
-      .limit(6);
-    
-    if (data) setCollections(data);
-  };
-
 
   const fetchProducts = async () => {
     const { data } = await supabase
       .from('products')
       .select('*')
+      .eq('status', 'active')
       .order('created_at', { ascending: false });
     
-    if (data) {
-      setProducts(data);
-      const max = Math.max(...data.map(p => p.price), 1000);
-      setMaxPrice(max);
-      setPriceRange([0, max]);
-    }
-  };
-
-  const categories = useMemo(() => {
-    return Array.from(new Set(products.map(p => p.category)));
-  }, [products]);
-
-  const filteredProducts = useMemo(() => {
-    let filtered = [...products];
-
-    if (searchQuery) {
-      const query = searchQuery.toLowerCase();
-      filtered = filtered.filter(p => 
-        p.name.toLowerCase().includes(query) || 
-        p.description.toLowerCase().includes(query)
-      );
-    }
-
-    if (selectedCategory !== 'all') {
-      filtered = filtered.filter(p => p.category === selectedCategory);
-    }
-
-    filtered = filtered.filter(p => 
-      p.price >= priceRange[0] && p.price <= priceRange[1]
-    );
-
-    filtered.sort((a, b) => {
-      switch (sortBy) {
-        case 'price-low': return a.price - b.price;
-        case 'price-high': return b.price - a.price;
-        case 'name-az': return a.name.localeCompare(b.name);
-        case 'newest': 
-        default: 
-          return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
-      }
-    });
-
-    return filtered;
-  }, [products, searchQuery, selectedCategory, priceRange, sortBy]);
-
-  const clearAll = () => {
-    setSearchQuery('');
-    setSelectedCategory('all');
-    setPriceRange([0, maxPrice]);
+    if (data) setProducts(data);
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold mb-2">Our Store</h1>
-          <p className="text-gray-600">Discover amazing products</p>
+    <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white">
+      <div className="max-w-4xl mx-auto px-4 py-12">
+        <div className="text-center mb-12">
+          <div className="w-24 h-24 bg-purple-600 rounded-full mx-auto mb-4"></div>
+          <h1 className="text-3xl font-bold mb-2">Creator Store</h1>
+          <p className="text-gray-600">Digital products and premium subscriptions</p>
         </div>
 
-        {collections.length > 0 && (
-          <div className="mb-12">
-            <h2 className="text-2xl font-bold mb-6">Featured Collections</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {collections.map(collection => (
-                <Link
-                  key={collection.id}
-                  to={`/collection/${collection.slug}`}
-                  className="bg-white rounded-lg p-6 shadow hover:shadow-lg transition"
-                >
-                  <div className="flex items-center gap-3 mb-3">
-                    <Layers className="w-6 h-6 text-purple-600" />
-                    <h3 className="text-xl font-semibold">{collection.name}</h3>
+        <div className="space-y-4">
+          {products.map(product => {
+            const isSubscription = product.product_type === 'subscription';
+            const hasAccess = hasAccessToProduct(product.id);
+
+            return (
+              <Card key={product.id} className={isSubscription ? 'border-purple-300' : ''}>
+                <CardContent className="p-6">
+                  <div className="flex justify-between items-start">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <h3 className="font-semibold text-lg">{product.name}</h3>
+                        {isSubscription && <Crown className="w-5 h-5 text-purple-600" />}
+                        {hasAccess && <Badge className="bg-green-600">Active</Badge>}
+                      </div>
+                      <p className="text-gray-600 text-sm mb-2">{product.description}</p>
+                      <div className="flex items-baseline gap-2">
+                        <p className="text-2xl font-bold text-purple-600">${product.price}</p>
+                        {isSubscription && (
+                          <span className="text-gray-500 text-sm">
+                            /{product.billing_interval}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                    <Link to={`/checkout/${product.id}`}>
+                      <Button className="bg-purple-600 hover:bg-purple-700">
+                        {hasAccess ? 'Manage' : isSubscription ? 'Subscribe' : 'Buy Now'}
+                      </Button>
+                    </Link>
                   </div>
-                  <p className="text-slate-600 text-sm mb-2">{collection.description}</p>
-                  <p className="text-xs text-slate-500">
-                    {collection.collection_products?.[0]?.count || 0} products
-                  </p>
-                </Link>
-              ))}
-            </div>
-          </div>
-        )}
+                  {isSubscription && (
+                    <div className="mt-4 pt-4 border-t">
+                      <div className="flex items-center gap-2 text-sm text-purple-600">
+                        <Lock className="w-4 h-4" />
+                        <span>Includes access to premium content</span>
+                      </div>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            );
+          })}
+        </div>
 
-
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-          <div className="lg:col-span-1">
-            <ProductFilters
-              searchQuery={searchQuery}
-              onSearchChange={setSearchQuery}
-              selectedCategory={selectedCategory}
-              onCategoryChange={setSelectedCategory}
-              priceRange={priceRange}
-              onPriceRangeChange={setPriceRange}
-              sortBy={sortBy}
-              onSortChange={setSortBy}
-              categories={categories}
-              maxPrice={maxPrice}
-            />
-          </div>
-
-          <div className="lg:col-span-3 space-y-6">
-            <ActiveFilters
-              searchQuery={searchQuery}
-              selectedCategory={selectedCategory}
-              priceRange={priceRange}
-              sortBy={sortBy}
-              maxPrice={maxPrice}
-              onClearSearch={() => setSearchQuery('')}
-              onClearCategory={() => setSelectedCategory('all')}
-              onClearPriceRange={() => setPriceRange([0, maxPrice])}
-              onClearAll={clearAll}
-            />
-
-            <div className="text-sm text-gray-600">
-              Showing {filteredProducts.length} of {products.length} products
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredProducts.map(product => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
-
-            {filteredProducts.length === 0 && (
-              <div className="text-center py-12">
-                <p className="text-gray-500">No products found</p>
-              </div>
-            )}
-          </div>
+        <div className="mt-8 text-center">
+          <Link to="/premium">
+            <Button variant="outline" className="border-purple-600 text-purple-600">
+              View Premium Content
+            </Button>
+          </Link>
         </div>
       </div>
     </div>
