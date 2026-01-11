@@ -8,6 +8,7 @@ interface AuthContextType {
   user: User | null;
   loading: boolean;
   testMode: boolean;
+  testModeAllowed: boolean;
   setTestMode: (enabled: boolean) => void;
   signUp: (email: string, password: string, metadata?: any) => Promise<void>;
   signIn: (email: string, password: string) => Promise<void>;
@@ -25,14 +26,32 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const saved = localStorage.getItem('testMode');
     return saved === 'true';
   });
+  const testModeAllowed = import.meta.env.VITE_TEST_MODE === 'true';
 
   const setTestMode = (enabled: boolean) => {
     setTestModeState(enabled);
     localStorage.setItem('testMode', enabled.toString());
   };
 
+  const buildTestUser = (email: string): User =>
+    ({
+      id: 'test-admin',
+      email,
+      aud: 'authenticated',
+      created_at: new Date().toISOString(),
+      app_metadata: {},
+      user_metadata: {},
+      role: 'authenticated',
+    }) as User;
 
   useEffect(() => {
+    if (testModeAllowed && testMode) {
+      console.log('🔐 AuthContext: Test mode enabled, using local admin session.');
+      setUser(buildTestUser('admin@example.com'));
+      setLoading(false);
+      return;
+    }
+
     const startTime = performance.now();
     console.log('🔐 AuthContext: Initializing auth state...');
     
@@ -113,6 +132,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
 
   const signIn = async (email: string, password: string) => {
+    if (testModeAllowed && email.toLowerCase() === 'admin@example.com') {
+      setTestMode(true);
+      setUser(buildTestUser(email));
+      return;
+    }
+
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
@@ -136,6 +161,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     user,
     loading,
     testMode,
+    testModeAllowed,
     setTestMode,
     signUp,
     signIn,
