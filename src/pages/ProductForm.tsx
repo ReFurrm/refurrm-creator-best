@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -10,18 +10,15 @@ import { Switch } from '@/components/ui/switch';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import DashboardNav from '@/components/DashboardNav';
 import AIProductGenerator from '@/components/AIProductGenerator';
-import { ArrowLeft, Sparkles, Upload, Plus, X, Package, AlertCircle } from 'lucide-react';
+import { ArrowLeft, Sparkles, Upload, Plus, X, Package } from 'lucide-react';
+
 import { useToast } from '@/hooks/use-toast';
-import { useSubscription } from '@/hooks/useSubscription';
-import { Alert, AlertDescription } from '@/components/ui/alert';
 
 export default function ProductForm() {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { hasActiveSubscription, isVip } = useSubscription();
   const [productType, setProductType] = useState('digital');
   const [showAIModal, setShowAIModal] = useState(false);
-
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -109,27 +106,9 @@ export default function ProductForm() {
           
           <h1 className="text-3xl font-bold text-gray-900">Create New Product</h1>
           <p className="text-gray-600 mt-2">Add a new product to your store</p>
-
         </div>
 
-        {!hasActiveSubscription() && !isVip() && (
-          <Alert className="mb-6 bg-blue-50 border-blue-200">
-            <AlertCircle className="h-4 w-4 text-blue-600" />
-            <AlertDescription className="text-blue-900">
-              <strong>No Cost to Start!</strong> Create and save products now. Subscribe when you're ready to publish and start selling.
-              <Button 
-                onClick={() => navigate('/pricing')} 
-                variant="link" 
-                className="ml-2 p-0 h-auto text-blue-600 underline"
-              >
-                View Plans
-              </Button>
-            </AlertDescription>
-          </Alert>
-        )}
-
         <form onSubmit={handleSubmit}>
-
           <Card className="mb-6">
             <CardHeader>
               <CardTitle>Product Type</CardTitle>

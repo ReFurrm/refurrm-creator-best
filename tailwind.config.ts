@@ -2,10 +2,10 @@
 module.exports = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
   ],
   prefix: "",
   theme: {
@@ -18,41 +18,38 @@ module.exports = {
     },
     extend: {
       colors: {
-        // --- ReFurrm Brand Palette ---
-        border: "#233554", // Dark blue-grey for borders
-        input: "#112240", // Deep Slate for input fields
-        ring: "#64FFDA",  // Electric Teal for focus rings
-        
-        background: "#0A192F", // MIDNIGHT BLUE (Main Background)
-        foreground: "#CCD6F6", // SILVER (Main Text)
-
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "#64FFDA", // ELECTRIC TEAL (Main Buttons)
-          foreground: "#0A192F", // Dark text on Teal buttons
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
-          DEFAULT: "#112240", // DEEP SLATE (Secondary Cards)
-          foreground: "#64FFDA", // Teal text on Slate
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
         },
         destructive: {
-          DEFAULT: "#ef4444", // Standard Red for errors
-          foreground: "#ffffff",
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
         },
         muted: {
-          DEFAULT: "#112240", // Deep Slate for muted areas
-          foreground: "#8892B0", // Muted Silver text
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
         },
         accent: {
-          DEFAULT: "#64FFDA", // Teal Accent
-          foreground: "#0A192F",
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
         },
         popover: {
-          DEFAULT: "#0A192F", // Same as background
-          foreground: "#CCD6F6",
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
         },
         card: {
-          DEFAULT: "#112240", // Deep Slate for Product Cards
-          foreground: "#CCD6F6",
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
         },
       },
       borderRadius: {
@@ -77,4 +74,4 @@ module.exports = {
     },
   },
   plugins: [require("tailwindcss-animate")],
-}
+};

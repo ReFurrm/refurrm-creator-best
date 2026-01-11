@@ -39,10 +39,10 @@ export default function ResetPassword() {
 
   if (sent) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-[#EDDACE] via-[#C24C1A]/10 to-[#1E8D70]/20 flex items-center justify-center p-4">
         <Card className="w-full max-w-md">
           <CardHeader className="text-center">
-            <CardTitle className="text-2xl font-bold">Check Your Email</CardTitle>
+            <CardTitle className="text-2xl font-bold text-[#5C4033]">Check Your Email</CardTitle>
             <CardDescription>
               We've sent password reset instructions to {email}
             </CardDescription>
@@ -65,7 +65,7 @@ export default function ResetPassword() {
           <CardFooter>
             <Link 
               to="/login" 
-              className="flex items-center text-sm text-purple-600 hover:underline mx-auto"
+              className="flex items-center text-sm text-[#C24C1A] hover:underline mx-auto"
             >
               <ArrowLeft className="w-4 h-4 mr-1" />
               Back to sign in
@@ -77,10 +77,10 @@ export default function ResetPassword() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-[#EDDACE] via-[#C24C1A]/10 to-[#1E8D70]/20 flex items-center justify-center p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-bold">Reset Password</CardTitle>
+          <CardTitle className="text-2xl font-bold text-[#5C4033]">Reset Password</CardTitle>
           <CardDescription>
             Enter your email and we'll send you reset instructions
           </CardDescription>
@@ -88,7 +88,7 @@ export default function ResetPassword() {
         <form onSubmit={handleSubmit}>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email" className="text-[#5C4033]">Email</Label>
               <Input
                 id="email"
                 type="email"
@@ -102,7 +102,7 @@ export default function ResetPassword() {
           <CardFooter className="flex flex-col gap-4">
             <Button 
               type="submit" 
-              className="w-full bg-purple-600 hover:bg-purple-700"
+              className="w-full bg-[#C24C1A] hover:bg-[#A63D14]"
               disabled={loading}
             >
               {loading ? (
@@ -116,7 +116,7 @@ export default function ResetPassword() {
             </Button>
             <Link 
               to="/login" 
-              className="flex items-center text-sm text-purple-600 hover:underline mx-auto"
+              className="flex items-center text-sm text-[#C24C1A] hover:underline mx-auto"
             >
               <ArrowLeft className="w-4 h-4 mr-1" />
               Back to sign in

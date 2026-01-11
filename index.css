@@ -4,56 +4,35 @@
 
 @layer base {
   :root {
-    /* --- INDUSTRIAL NEON THEME (Forced Dark Mode) --- */
-    
-    /* Main Background: Gunmetal (#1C1C1C) */
-    --background: 0 0% 11%; 
-    
-    /* Text: Platinum (#F5F5F5) */
-    --foreground: 0 0% 96%;
+    /* Soft Studio Light */
+    --background: 240 33% 98%;
+    --foreground: 222 22% 16%;
 
-    /* Cards: Slightly lighter Charcoal (#2A2A2A) */
-    --card: 0 0% 16%;
-    --card-foreground: 0 0% 96%;
-    
-    /* Popovers/Menus: Same as Card */
-    --popover: 0 0% 16%;
-    --popover-foreground: 0 0% 96%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 22% 16%;
 
-    /* Primary Button: BRIGHT NEON TEAL (#00E5FF) */
-    --primary: 186 100% 50%;
-    --primary-foreground: 0 0% 11%; /* Black text on the neon button */
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 22% 16%;
 
-    /* Secondary: Dark Silver (#4A4A4A) */
-    --secondary: 0 0% 29%;
-    --secondary-foreground: 0 0% 96%;
+    --primary: 262 83% 55%;
+    --primary-foreground: 0 0% 100%;
 
-    /* Muted elements */
-    --muted: 0 0% 16%;
-    --muted-foreground: 0 0% 64%;
+    --secondary: 210 20% 96%;
+    --secondary-foreground: 222 22% 16%;
 
-    /* Accents */
-    --accent: 0 0% 29%;
-    --accent-foreground: 0 0% 96%;
+    --muted: 210 20% 96%;
+    --muted-foreground: 215 15% 46%;
 
-    /* Error Red */
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 96%;
+    --accent: 265 60% 96%;
+    --accent-foreground: 262 60% 30%;
 
-    /* Borders: Dark Silver */
-    --border: 0 0% 29%;
-    --input: 0 0% 16%;
-    
-    /* Focus Ring: Neon Teal */
-    --ring: 186 100% 50%;
-    
+    --destructive: 0 74% 52%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 15% 90%;
+    --input: 220 15% 92%;
+    --ring: 262 83% 55%;
+
     --radius: 0.5rem;
-  }
-  
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
   }
 }

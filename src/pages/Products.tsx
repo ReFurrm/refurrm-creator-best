@@ -78,7 +78,7 @@ export default function Products() {
         <div className="flex justify-between items-start mb-2">
           <div>
             <h3 className="font-semibold text-lg">{product.name}</h3>
-            <p className="text-2xl font-bold text-purple-600">${product.price}</p>
+            <p className="text-2xl font-bold text-[#C24C1A]">${product.price}</p>
           </div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -155,7 +155,7 @@ export default function Products() {
             <p className="text-gray-600 mt-2">Manage your digital products, courses, and services</p>
           </div>
           <Link to="/products/new">
-            <Button className="bg-purple-600 hover:bg-purple-700">
+            <Button className="bg-[#C24C1A] hover:bg-[#A63D14]">
               <Plus className="mr-2 h-4 w-4" />
               Add Product
             </Button>
@@ -210,7 +210,7 @@ export default function Products() {
               <h3 className="text-lg font-semibold mb-2">No products yet</h3>
               <p className="text-gray-600 mb-4">Start selling by creating your first product</p>
               <Link to="/products/new">
-                <Button className="bg-purple-600 hover:bg-purple-700">
+                <Button className="bg-[#C24C1A] hover:bg-[#A63D14]">
                   <Plus className="mr-2 h-4 w-4" />
                   Create First Product
                 </Button>

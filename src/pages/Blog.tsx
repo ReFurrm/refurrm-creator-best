@@ -47,35 +47,36 @@ export default function Blog() {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-slate-900">
-      <nav className="bg-black/40 backdrop-blur-md border-b border-purple-500/20 sticky top-0 z-50">
+    <div className="min-h-screen bg-[#EDDACE]">
+      <nav className="bg-[#1E8D70]/20 backdrop-blur-md border-b border-[#C24C1A]/30 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <Link to="/" className="text-3xl font-black bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+          <Link to="/" className="text-3xl font-black bg-gradient-to-r from-[#C24C1A] to-[#1E8D70] bg-clip-text text-transparent">
             ReFurrm
           </Link>
           <div className="flex gap-4">
-            <Link to="/"><Button variant="ghost" className="text-white">Home</Button></Link>
-            <Link to="/pricing"><Button variant="ghost" className="text-white">Pricing</Button></Link>
+            <Link to="/"><Button variant="ghost" className="text-[#5C4033]">Home</Button></Link>
+            <Link to="/pricing"><Button variant="ghost" className="text-[#5C4033]">Pricing</Button></Link>
           </div>
         </div>
       </nav>
 
       <div className="max-w-7xl mx-auto px-6 py-16">
-        <h1 className="text-6xl font-black text-white mb-4">Blog</h1>
-        <p className="text-xl text-purple-200 mb-8">Tips, tutorials, and insights for creators</p>
+        <h1 className="text-6xl font-black text-[#5C4033] mb-4">Blog</h1>
+        <p className="text-xl text-[#1E8D70] mb-8">Tips, tutorials, and insights for creators</p>
 
         <div className="flex flex-col md:flex-row gap-4 mb-8">
           <Input
             placeholder="Search articles..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="md:w-96 bg-slate-800/50 border-slate-600 text-white"
+            className="md:w-96 bg-[#EDDACE]/50 border-[#C24C1A]/30 text-[#5C4033]"
           />
           <div className="flex gap-2 flex-wrap">
             <Button
               variant={!selectedCategory ? 'default' : 'outline'}
               onClick={() => setSelectedCategory(null)}
               size="sm"
+              className="bg-[#C24C1A] hover:bg-[#A63D14]"
             >
               All
             </Button>
@@ -85,6 +86,7 @@ export default function Blog() {
                 variant={selectedCategory === cat ? 'default' : 'outline'}
                 onClick={() => setSelectedCategory(cat)}
                 size="sm"
+                className={selectedCategory === cat ? 'bg-[#C24C1A] hover:bg-[#A63D14]' : 'border-[#C24C1A] text-[#C24C1A]'}
               >
                 {cat}
               </Button>
@@ -94,13 +96,13 @@ export default function Blog() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredPosts.map(post => (
-            <Card key={post.id} className="bg-slate-800/50 border-slate-700 overflow-hidden hover:shadow-xl hover:shadow-purple-500/20 transition-all">
+            <Card key={post.id} className="bg-[#1E8D70]/10 border-[#C24C1A]/30 overflow-hidden hover:shadow-xl hover:shadow-[#C24C1A]/20 transition-all">
               <img src={post.featured_image} alt={post.title} className="w-full h-48 object-cover" />
               <div className="p-6">
-                <Badge className="mb-2">{post.category}</Badge>
-                <h3 className="text-xl font-bold text-white mb-2">{post.title}</h3>
-                <p className="text-slate-300 mb-4">{post.excerpt}</p>
-                <div className="flex justify-between items-center text-sm text-slate-400">
+                <Badge className="mb-2 bg-[#C24C1A]">{post.category}</Badge>
+                <h3 className="text-xl font-bold text-[#5C4033] mb-2">{post.title}</h3>
+                <p className="text-[#8B7355] mb-4">{post.excerpt}</p>
+                <div className="flex justify-between items-center text-sm text-[#8B7355]">
                   <span>{post.author_name}</span>
                   <span>{new Date(post.published_at).toLocaleDateString()}</span>
                 </div>
