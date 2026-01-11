@@ -1,10 +1,30 @@
 import { lazy, Suspense } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from '@/contexts/AuthContext';
 import { AppProvider } from '@/contexts/AppContext';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/toaster';
 import ProtectedRoute from '@/components/ProtectedRoute';
+import { AdminRoute } from '@/components/AdminRoute';
+
+import './App.css';
+
+// Loading fallback component
+const LoadingFallback = () => (
+  <div className="min-h-screen flex items-center justify-center bg-gray-50">
+    <div className="text-center space-y-4">
+      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+      <p className="text-gray-600">Loading...</p>
+    </div>
+  </div>
+);
+
+// Lazy load all page components
+const Index = lazy(() => import('@/pages/Index'));
+const Login = lazy(() => import('@/pages/Login'));
+const Signup = lazy(() => import('@/pages/Signup'));
+const ResetPassword = lazy(() => import('@/pages/ResetPassword'));
 import Index from '@/pages/Index';
 import Login from '@/pages/Login';
 import Signup from '@/pages/Signup';
@@ -57,6 +77,9 @@ const Subscriptions = lazy(() => import('@/pages/Subscriptions'));
 const PremiumContent = lazy(() => import('@/pages/PremiumContent'));
 const Dunning = lazy(() => import('@/pages/Dunning'));
 const Profile = lazy(() => import('@/pages/Profile'));
+const CustomerSupport = lazy(() => import('@/pages/CustomerSupport'));
+const SupportAdmin = lazy(() => import('@/pages/SupportAdmin'));
+const NotFound = lazy(() => import('@/pages/NotFound'));
 const SupportAdmin = lazy(() => import('@/pages/SupportAdmin'));
 const Admin = lazy(() => import('@/pages/Admin'));
 const Pricing = lazy(() => import('@/pages/Pricing'));
@@ -91,6 +114,8 @@ const Collections = lazy(() => import('@/pages/Collections'));
 const CollectionStorefront = lazy(() => import('@/pages/CollectionStorefront'));
 const SocialMediaAnalytics = lazy(() => import('@/pages/SocialMediaAnalytics'));
 const CreatorRights = lazy(() => import('@/pages/CreatorRights'));
+
+
 const Community = lazy(() => import('@/pages/Community'));
 const Marketplace = lazy(() => import('@/pages/Marketplace'));
 
@@ -107,6 +132,8 @@ function App() {
       <AuthProvider>
         <AppProvider>
           <Router>
+            <Suspense fallback={<LoadingFallback />}>
+            <Routes>
             <Suspense fallback={<RouteFallback />}>
               <Routes>
               {/* Public routes */}
@@ -167,6 +194,7 @@ function App() {
               
               {/* Catch all */}
               <Route path="*" element={<NotFound />} />
+            </Routes>
               </Routes>
             </Suspense>
             <CustomerSupport />
