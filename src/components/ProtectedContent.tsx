@@ -58,8 +58,7 @@ export function ProtectedContent({
           <AlertCircle className="w-12 h-12 text-orange-600 mx-auto mb-4" />
           <h3 className="text-xl font-semibold mb-2">Subscription Required</h3>
           <p className="text-gray-600 mb-4">Subscribe to access this premium content</p>
-          <Link to="/pricing">
-
+          <Link to="/storefront">
             <Button className="bg-purple-600 hover:bg-purple-700">View Plans</Button>
           </Link>
         </CardContent>

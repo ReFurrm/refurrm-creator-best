@@ -3,56 +3,35 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import DashboardNav from '@/components/DashboardNav';
-import UsageProgressBars from '@/components/UsageProgressBars';
-import BillingHistoryTable from '@/components/BillingHistoryTable';
-import PlanComparisonCards from '@/components/PlanComparisonCards';
-import PaymentMethodCard from '@/components/PaymentMethodCard';
-import { TrialCountdown } from '@/components/TrialCountdown';
-import { TrialBadge } from '@/components/TrialBadge';
 import { supabase } from '@/lib/supabase';
 import { useToast } from '@/hooks/use-toast';
-import { Calendar, CreditCard, AlertCircle, CheckCircle, TrendingUp } from 'lucide-react';
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-
-
+import { Calendar, CreditCard, AlertCircle, CheckCircle } from 'lucide-react';
 
 export default function Subscriptions() {
-  const [subscription, setSubscription] = useState<any>(null);
+  const [subscriptions, setSubscriptions] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
 
   useEffect(() => {
-    loadSubscription();
+    loadSubscriptions();
   }, []);
 
-  const loadSubscription = async () => {
+  const loadSubscriptions = async () => {
     try {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return;
 
       const { data, error } = await supabase
         .from('subscriptions')
-        .select('*')
+        .select('*, products(name, description, price)')
         .eq('user_id', user.id)
-        .order('created_at', { ascending: false })
-        .limit(1)
-        .single();
+        .order('created_at', { ascending: false });
 
-      if (error && error.code !== 'PGRST116') throw error;
-      setSubscription(data || { status: 'none', product_id: 'starter' });
+      if (error) throw error;
+      setSubscriptions(data || []);
     } catch (error: any) {
       toast({
-        title: "Error loading subscription",
+        title: "Error loading subscriptions",
         description: error.message,
         variant: "destructive"
       });
@@ -61,10 +40,10 @@ export default function Subscriptions() {
     }
   };
 
-  const cancelSubscription = async () => {
+  const cancelSubscription = async (subId: string) => {
     try {
       const { error } = await supabase.functions.invoke('cancel-subscription', {
-        body: { subscriptionId: subscription.stripe_subscription_id }
+        body: { subscriptionId: subId }
       });
 
       if (error) throw error;
@@ -74,7 +53,7 @@ export default function Subscriptions() {
         description: "Your subscription will remain active until the end of the billing period."
       });
       
-      loadSubscription();
+      loadSubscriptions();
     } catch (error: any) {
       toast({
         title: "Error",
@@ -85,148 +64,84 @@ export default function Subscriptions() {
   };
 
   const getStatusBadge = (status: string) => {
-    const config: any = {
-      active: { variant: 'default', label: 'Active' },
-      canceled: { variant: 'secondary', label: 'Canceled' },
-      past_due: { variant: 'destructive', label: 'Past Due' },
-      none: { variant: 'outline', label: 'No Subscription' }
+    const variants: any = {
+      active: 'default',
+      canceled: 'secondary',
+      past_due: 'destructive',
+      unpaid: 'destructive'
     };
-    const { variant, label } = config[status] || config.none;
-    return <Badge variant={variant}>{label}</Badge>;
-  };
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gray-50">
-        <DashboardNav />
-        <main className="max-w-7xl mx-auto px-4 py-8">
-          <Card><CardContent className="p-8 text-center">Loading...</CardContent></Card>
-        </main>
-      </div>
-    );
-  }
-
-  const calculateDaysRemaining = () => {
-    if (!subscription?.trial_end_date) return 0;
-    const now = new Date();
-    const endDate = new Date(subscription.trial_end_date);
-    return Math.ceil((endDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
+    return <Badge variant={variants[status] || 'secondary'}>{status}</Badge>;
   };
 
   return (
     <div className="min-h-screen bg-gray-50">
       <DashboardNav />
-      <main className="max-w-7xl mx-auto px-4 py-8">
-        <div className="flex justify-between items-center mb-8">
-          <div className="flex items-center gap-3">
-            <h1 className="text-3xl font-bold">Subscription Management</h1>
-            {(subscription?.is_trial || subscription?.is_vip) && (
-              <TrialBadge 
-                daysRemaining={subscription?.is_trial ? calculateDaysRemaining() : undefined}
-                isVip={subscription?.is_vip}
-                variant="compact" 
-              />
-            )}
-          </div>
-          {getStatusBadge(subscription?.status || 'none')}
-        </div>
+      <main className="max-w-6xl mx-auto px-4 py-8">
+        <h1 className="text-3xl font-bold mb-8">My Subscriptions</h1>
 
-
-        {subscription?.is_trial && subscription?.trial_end_date && (
-          <div className="mb-6">
-            <TrialCountdown 
-              trialEndDate={subscription.trial_end_date} 
-              currentPlan={subscription.tier || 'Pro'} 
-            />
+        {loading ? (
+          <Card><CardContent className="p-8 text-center">Loading...</CardContent></Card>
+        ) : subscriptions.length === 0 ? (
+          <Card><CardContent className="p-8 text-center text-gray-500">No active subscriptions</CardContent></Card>
+        ) : (
+          <div className="space-y-4">
+            {subscriptions.map((sub) => (
+              <Card key={sub.id}>
+                <CardHeader>
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <CardTitle>{sub.products?.name}</CardTitle>
+                      <CardDescription>{sub.products?.description}</CardDescription>
+                    </div>
+                    {getStatusBadge(sub.status)}
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid md:grid-cols-3 gap-4 mb-4">
+                    <div className="flex items-center gap-2">
+                      <CreditCard className="h-4 w-4 text-gray-500" />
+                      <div>
+                        <p className="text-sm text-gray-500">Price</p>
+                        <p className="font-semibold">${sub.products?.price}/month</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Calendar className="h-4 w-4 text-gray-500" />
+                      <div>
+                        <p className="text-sm text-gray-500">Next billing</p>
+                        <p className="font-semibold">
+                          {new Date(sub.current_period_end).toLocaleDateString()}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      {sub.cancel_at_period_end ? (
+                        <AlertCircle className="h-4 w-4 text-orange-500" />
+                      ) : (
+                        <CheckCircle className="h-4 w-4 text-green-500" />
+                      )}
+                      <div>
+                        <p className="text-sm text-gray-500">Status</p>
+                        <p className="font-semibold">
+                          {sub.cancel_at_period_end ? 'Canceling' : 'Active'}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {sub.status === 'active' && !sub.cancel_at_period_end && (
+                    <Button 
+                      variant="outline" 
+                      onClick={() => cancelSubscription(sub.stripe_subscription_id)}
+                    >
+                      Cancel Subscription
+                    </Button>
+                  )}
+                </CardContent>
+              </Card>
+            ))}
           </div>
         )}
-
-
-        <div className="grid lg:grid-cols-3 gap-6 mb-6">
-          <Card>
-            <CardHeader>
-              <CardTitle>Current Plan</CardTitle>
-              <CardDescription>Pro Plan</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="text-3xl font-bold mb-2">$29<span className="text-lg text-gray-500">/mo</span></p>
-              <div className="flex items-center gap-2 text-sm text-gray-600 mb-4">
-                <Calendar className="h-4 w-4" />
-                Next billing: {subscription?.current_period_end ? new Date(subscription.current_period_end).toLocaleDateString() : 'N/A'}
-              </div>
-              <Button className="w-full" variant="outline">
-                <TrendingUp className="h-4 w-4 mr-2" />
-                Upgrade Plan
-              </Button>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Billing Status</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-center gap-3 mb-4">
-                {subscription?.cancel_at_period_end ? (
-                  <AlertCircle className="h-8 w-8 text-orange-500" />
-                ) : (
-                  <CheckCircle className="h-8 w-8 text-green-500" />
-                )}
-                <div>
-                  <p className="font-semibold">
-                    {subscription?.cancel_at_period_end ? 'Canceling Soon' : 'Active & Current'}
-                  </p>
-                  <p className="text-sm text-gray-500">All payments up to date</p>
-                </div>
-              </div>
-              {subscription?.status === 'active' && !subscription?.cancel_at_period_end && (
-                <AlertDialog>
-                  <AlertDialogTrigger asChild>
-                    <Button variant="destructive" className="w-full">Cancel Subscription</Button>
-                  </AlertDialogTrigger>
-                  <AlertDialogContent>
-                    <AlertDialogHeader>
-                      <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-                      <AlertDialogDescription>
-                        Your subscription will remain active until the end of your billing period. You can reactivate anytime before then.
-                      </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                      <AlertDialogCancel>Keep Subscription</AlertDialogCancel>
-                      <AlertDialogAction onClick={cancelSubscription}>Cancel Subscription</AlertDialogAction>
-                    </AlertDialogFooter>
-                  </AlertDialogContent>
-                </AlertDialog>
-              )}
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Total Spent</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-3xl font-bold mb-2">$116.00</p>
-              <p className="text-sm text-gray-500 mb-4">4 months subscribed</p>
-              <div className="flex items-center gap-2 text-sm">
-                <CreditCard className="h-4 w-4 text-gray-400" />
-                <span className="text-gray-600">Visa ending in 4242</span>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        <div className="grid lg:grid-cols-2 gap-6 mb-6">
-          <UsageProgressBars planTier="pro" />
-          <PaymentMethodCard />
-        </div>
-
-        <div className="mb-6">
-          <PlanComparisonCards currentPlan="pro" isVip={subscription?.is_vip} />
-        </div>
-
-
-        <BillingHistoryTable />
       </main>
     </div>
   );
