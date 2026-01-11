@@ -22,6 +22,7 @@ export default function Settings() {
     bio: '',
     primary_color: '#6366f1',
     theme: 'light',
+    facebook_url: '',
     instagram_url: '',
     tiktok_url: '',
     youtube_url: ''
@@ -62,6 +63,7 @@ export default function Settings() {
         bio: shopData.bio || '',
         primary_color: shopData.primary_color || '#6366f1',
         theme: shopData.theme || 'light',
+        facebook_url: shopData.facebook_url || '',
         instagram_url: shopData.instagram_url || '',
         tiktok_url: shopData.tiktok_url || '',
         youtube_url: shopData.youtube_url || ''
@@ -218,7 +220,16 @@ export default function Settings() {
                   className="w-full px-4 py-2 border border-slate-300 rounded-lg h-24"
                 />
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">Facebook URL</label>
+                  <input
+                    type="url"
+                    value={shopForm.facebook_url}
+                    onChange={(e) => setShopForm({ ...shopForm, facebook_url: e.target.value })}
+                    className="w-full px-4 py-2 border border-slate-300 rounded-lg"
+                  />
+                </div>
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">Instagram URL</label>
                   <input
