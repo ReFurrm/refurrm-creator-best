@@ -1,11 +1,13 @@
 // Performance monitoring utility
+import { logger } from '@/lib/logger';
+
 export interface PerformanceMetric {
   id: string;
   type: 'page-load' | 'component-render' | 'api-call' | 'error';
   name: string;
   duration?: number;
   timestamp: number;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
   error?: string;
 }
 
@@ -27,7 +29,11 @@ class PerformanceMonitor {
       this.metrics = this.metrics.slice(-this.maxMetrics);
     }
     
-    console.log(`[Performance] ${metric.type}: ${metric.name}`, metric.duration ? `${metric.duration}ms` : '', metric.metadata || '');
+    logger.info(
+      `[Performance] ${metric.type}: ${metric.name}`,
+      metric.duration ? `${metric.duration}ms` : '',
+      metric.metadata || ''
+    );
     
     // Store in localStorage for persistence
     this.saveToStorage();
@@ -50,7 +56,7 @@ class PerformanceMonitor {
     try {
       localStorage.setItem('performance-metrics', JSON.stringify(this.metrics.slice(-100)));
     } catch (e) {
-      console.warn('Failed to save metrics to storage');
+      logger.warn('Failed to save metrics to storage');
     }
   }
 
@@ -61,7 +67,7 @@ class PerformanceMonitor {
         this.metrics = JSON.parse(stored);
       }
     } catch (e) {
-      console.warn('Failed to load metrics from storage');
+      logger.warn('Failed to load metrics from storage');
     }
   }
 }

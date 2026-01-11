@@ -2,14 +2,6 @@ import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/contexts/AuthContext';
 import DashboardNav from '@/components/DashboardNav';
-import PrintifyIntegration from '@/components/PrintifyIntegration';
-import ProfitMarginCalculator from '@/components/ProfitMarginCalculator';
-import { PrintfulIntegration } from '@/components/PrintfulIntegration';
-import { SocialMediaScheduler } from '@/components/SocialMediaScheduler';
-import GoogleCalendarIntegration from '@/components/GoogleCalendarIntegration';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-
-
 
 export default function Integrations() {
   const { user } = useAuth();
@@ -99,65 +91,40 @@ export default function Integrations() {
           {loading ? (
             <p className="text-slate-600">Loading integrations...</p>
           ) : (
-            <Tabs defaultValue="print" className="space-y-6">
-              <TabsList>
-                <TabsTrigger value="print">Print on Demand</TabsTrigger>
-                <TabsTrigger value="social">Social Media</TabsTrigger>
-                <TabsTrigger value="other">Other</TabsTrigger>
-              </TabsList>
-
-              <TabsContent value="print" className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <PrintifyIntegration />
-                  <PrintfulIntegration />
-                </div>
-                <ProfitMarginCalculator />
-              </TabsContent>
-
-              <TabsContent value="social">
-                <SocialMediaScheduler />
-              </TabsContent>
-
-              <TabsContent value="other" className="space-y-6">
-                <GoogleCalendarIntegration />
-
-                {integrationsList.filter(i => i.type !== 'google_calendar').map(integration => (
-                  <div key={integration.type} className="bg-white rounded-lg shadow p-6">
-                    <div className="flex items-start justify-between">
-                      <div className="flex items-start gap-4">
-                        <div className="text-4xl">{integration.icon}</div>
-                        <div>
-                          <h3 className="text-xl font-semibold text-slate-900 mb-2">{integration.name}</h3>
-                          <p className="text-slate-600 mb-4">{integration.description}</p>
-                          <span className={`inline-block px-3 py-1 rounded text-sm ${
-                            integration.status === 'Connected'
-                              ? 'bg-green-100 text-green-700'
-                              : 'bg-slate-100 text-slate-600'
-                          }`}>
-                            {integration.status}
-                          </span>
-                        </div>
-                      </div>
-                      <button
-                        onClick={() => connectIntegration(integration.name)}
-                        className={`px-6 py-3 rounded-lg font-semibold transition ${
+            <div className="space-y-6">
+              {integrationsList.map(integration => (
+                <div key={integration.type} className="bg-white rounded-lg shadow p-6">
+                  <div className="flex items-start justify-between">
+                    <div className="flex items-start gap-4">
+                      <div className="text-4xl">{integration.icon}</div>
+                      <div>
+                        <h3 className="text-xl font-semibold text-slate-900 mb-2">{integration.name}</h3>
+                        <p className="text-slate-600 mb-4">{integration.description}</p>
+                        <span className={`inline-block px-3 py-1 rounded text-sm ${
                           integration.status === 'Connected'
-                            ? 'bg-slate-200 text-slate-700 hover:bg-slate-300'
-                            : 'bg-purple-600 text-white hover:bg-purple-700'
-                        }`}
-                      >
-                        {integration.status === 'Connected' ? 'Disconnect' : 'Connect'}
-                      </button>
+                            ? 'bg-green-100 text-green-700'
+                            : 'bg-slate-100 text-slate-600'
+                        }`}>
+                          {integration.status}
+                        </span>
+                      </div>
                     </div>
+                    <button
+                      onClick={() => connectIntegration(integration.name)}
+                      className={`px-6 py-3 rounded-lg font-semibold transition ${
+                        integration.status === 'Connected'
+                          ? 'bg-slate-200 text-slate-700 hover:bg-slate-300'
+                          : 'bg-purple-600 text-white hover:bg-purple-700'
+                      }`}
+                    >
+                      {integration.status === 'Connected' ? 'Disconnect' : 'Connect'}
+                    </button>
                   </div>
-                ))}
-
-              </TabsContent>
-            </Tabs>
-
+                </div>
+              ))}
+            </div>
           )}
         </div>
-
       </div>
     </div>
   );
