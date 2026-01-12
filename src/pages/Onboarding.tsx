@@ -89,29 +89,7 @@ export default function Onboarding() {
         title: "Store created!",
         description: `AI generated ${aiData.starterProducts?.length || 0} starter products for you.`,
       });
-  const handleNext = async () => {
-    if (currentStep > 0) {
-      await updateStep(currentStep + 1);
-    }
-    
-    if (currentStep === STEPS.length - 1) {
-      await completeOnboarding();
       navigate('/store-builder');
-
-    } else {
-      setCurrentStep(currentStep + 1);
-    }
-
-  };
-
-  const handleSkip = async () => {
-    if (currentStep > 0) {
-      await updateStep(currentStep + 1);
-    }
-    
-    if (currentStep === STEPS.length - 1) {
-      await completeOnboarding();
-      navigate('/dashboard');
     } catch (error) {
       toast({
         title: "Setup failed",
