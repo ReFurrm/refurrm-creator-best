@@ -13,24 +13,55 @@ export interface Subscription {
 export function useSubscription() {
   const { user, testMode } = useAuth();
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!user) {
-      setSubscriptions([]);
-      setLoading(false);
-      return;
-    }
+    let isMounted = true;
 
-    // If test mode is enabled, skip fetching and just set loading to false
-    if (testMode) {
-      setLoading(false);
-      return;
-    }
+    const loadAccess = async () => {
+      setLoading(true);
 
-    fetchSubscriptions();
+      if (!user) {
+        setSubscriptions([]);
+        setIsAdmin(false);
+        setLoading(false);
+        return;
+      }
+
+      // If test mode is enabled, skip fetching and just set loading to false
+      if (testMode) {
+        setIsAdmin(true);
+        setLoading(false);
+        return;
+      }
+
+      const { data } = await supabase
+        .from('profiles')
+        .select('role')
+        .eq('id', user.id)
+        .single();
+
+      const admin = data?.role === 'admin';
+
+      if (isMounted) {
+        setIsAdmin(admin);
+      }
+
+      if (admin) {
+        setLoading(false);
+        return;
+      }
+
+      await fetchSubscriptions();
+    };
+
+    loadAccess();
+
+    return () => {
+      isMounted = false;
+    };
   }, [user, testMode]);
-
 
   const fetchSubscriptions = async () => {
     if (!user) return;
@@ -49,7 +80,7 @@ export function useSubscription() {
 
   const hasActiveSubscription = (productId?: string) => {
     // If test mode is enabled, always return true
-    if (testMode) return true;
+    if (testMode || isAdmin) return true;
     
     const activeStatuses = ['active', 'trialing', 'past_due'];
     
@@ -64,7 +95,7 @@ export function useSubscription() {
 
   const hasAccessToProduct = (productId: string) => {
     // If test mode is enabled, always return true
-    if (testMode) return true;
+    if (testMode || isAdmin) return true;
     
     return hasActiveSubscription(productId);
   };

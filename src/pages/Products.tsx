@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 export default function Products() {
+  const navigate = useNavigate();
   const [products] = useState([
     {
       id: 1,
@@ -87,7 +88,7 @@ export default function Products() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={() => navigate(`/products/${product.id}/edit`)}>
                 <Edit className="mr-2 h-4 w-4" />
                 Edit
               </DropdownMenuItem>
@@ -95,7 +96,7 @@ export default function Products() {
                 <Copy className="mr-2 h-4 w-4" />
                 Duplicate
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={() => window.open('/storefront', '_blank', 'noopener,noreferrer')}>
                 <Eye className="mr-2 h-4 w-4" />
                 View Live
               </DropdownMenuItem>

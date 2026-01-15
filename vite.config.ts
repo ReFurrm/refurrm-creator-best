@@ -3,7 +3,7 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 
 // https://vitejs.dev/config/
-export default defineConfig(() => ({
+export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
@@ -48,12 +48,12 @@ export default defineConfig(() => ({
       },
     },
     chunkSizeWarningLimit: 600,
-    sourcemap: mode === 'development',
+    sourcemap: mode === "development",
     minify: 'terser',
     terserOptions: {
       compress: {
-        drop_console: mode === 'production',
-        drop_debugger: mode === 'production',
+        drop_console: mode === "production",
+        drop_debugger: mode === "production",
       },
     },
   },

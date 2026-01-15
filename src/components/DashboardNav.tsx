@@ -78,7 +78,7 @@ export default function DashboardNav() {
               </Button>
             </Link>
 
-            <Link to="/shop/demo" target="_blank">
+            <Link to="/storefront" target="_blank" rel="noreferrer">
               <Button variant="outline" size="sm">
                 <Store className="w-4 h-4 mr-2" />
                 View Store

@@ -43,6 +43,19 @@ export default function ProductForm() {
     variants: []
   });
 
+  const addModule = () => {
+    setFormData({
+      ...formData,
+      modules: [...formData.modules, { title: '', description: '' }]
+    });
+  };
+
+  const updateModule = (index: number, field: string, value: string) => {
+    const updatedModules = [...formData.modules];
+    updatedModules[index] = { ...updatedModules[index], [field]: value };
+    setFormData({ ...formData, modules: updatedModules });
+  };
+
 
 
   const handleAIApply = (data: any) => {
@@ -267,13 +280,43 @@ export default function ProductForm() {
                 <CardDescription>Organize your course content</CardDescription>
               </CardHeader>
               <CardContent>
-                <Button type="button" variant="outline" className="mb-4">
+                <Button type="button" variant="outline" className="mb-4" onClick={addModule}>
                   <Plus className="mr-2 h-4 w-4" />
                   Add Module
                 </Button>
-                <p className="text-sm text-gray-600">
-                  Start by adding modules, then add lessons to each module.
-                </p>
+                {formData.modules.length === 0 ? (
+                  <p className="text-sm text-gray-600">
+                    Start by adding modules, then add lessons to each module.
+                  </p>
+                ) : (
+                  <div className="space-y-4">
+                    {formData.modules.map((module: any, index: number) => (
+                      <div key={index} className="rounded-lg border border-gray-200 p-4">
+                        <div className="space-y-3">
+                          <div>
+                            <Label htmlFor={`module-title-${index}`}>Module Title</Label>
+                            <Input
+                              id={`module-title-${index}`}
+                              value={module.title}
+                              onChange={(e) => updateModule(index, 'title', e.target.value)}
+                              placeholder="e.g., Getting Started"
+                            />
+                          </div>
+                          <div>
+                            <Label htmlFor={`module-description-${index}`}>Module Description</Label>
+                            <Textarea
+                              id={`module-description-${index}`}
+                              value={module.description}
+                              onChange={(e) => updateModule(index, 'description', e.target.value)}
+                              placeholder="What will learners cover in this module?"
+                              className="min-h-[80px]"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </CardContent>
             </Card>
           )}

@@ -128,9 +128,11 @@ export default function Dashboard() {
                   </div>
                 ))}
               </div>
-              <Button variant="outline" className="w-full mt-4">
-                View All Orders
-              </Button>
+              <Link to="/orders">
+                <Button variant="outline" className="w-full mt-4">
+                  View All Orders
+                </Button>
+              </Link>
             </CardContent>
           </Card>
 
