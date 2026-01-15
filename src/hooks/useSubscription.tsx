@@ -8,37 +8,60 @@ export interface Subscription {
   current_period_end: string;
   product_id: string;
   cancel_at_period_end: boolean;
-  tier: string;
-  is_trial: boolean;
-  trial_start_date: string | null;
-  trial_end_date: string | null;
-  trial_reminder_sent: boolean;
-  is_vip: boolean;
 }
-
-
 
 export function useSubscription() {
   const { user, testMode } = useAuth();
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!user) {
-      setSubscriptions([]);
-      setLoading(false);
-      return;
-    }
+    let isMounted = true;
 
-    // If test mode is enabled, skip fetching and just set loading to false
-    if (testMode) {
-      setLoading(false);
-      return;
-    }
+    const loadAccess = async () => {
+      setLoading(true);
 
-    fetchSubscriptions();
+      if (!user) {
+        setSubscriptions([]);
+        setIsAdmin(false);
+        setLoading(false);
+        return;
+      }
+
+      // If test mode is enabled, skip fetching and just set loading to false
+      if (testMode) {
+        setIsAdmin(true);
+        setLoading(false);
+        return;
+      }
+
+      const { data } = await supabase
+        .from('profiles')
+        .select('role')
+        .eq('id', user.id)
+        .single();
+
+      const admin = data?.role === 'admin';
+
+      if (isMounted) {
+        setIsAdmin(admin);
+      }
+
+      if (admin) {
+        setLoading(false);
+        return;
+      }
+
+      await fetchSubscriptions();
+    };
+
+    loadAccess();
+
+    return () => {
+      isMounted = false;
+    };
   }, [user, testMode]);
-
 
   const fetchSubscriptions = async () => {
     if (!user) return;
@@ -47,8 +70,7 @@ export function useSubscription() {
       .from('subscriptions')
       .select('*')
       .eq('user_id', user.id)
-      .in('status', ['active', 'past_due']);
-
+      .in('status', ['active', 'trialing', 'past_due']);
 
     if (!error && data) {
       setSubscriptions(data);
@@ -58,13 +80,9 @@ export function useSubscription() {
 
   const hasActiveSubscription = (productId?: string) => {
     // If test mode is enabled, always return true
-    if (testMode) return true;
+    if (testMode || isAdmin) return true;
     
-    // VIP users always have access
-    if (subscriptions.some(sub => sub.is_vip)) return true;
-    
-    const activeStatuses = ['active', 'past_due'];
-
+    const activeStatuses = ['active', 'trialing', 'past_due'];
     
     if (productId) {
       return subscriptions.some(
@@ -77,16 +95,9 @@ export function useSubscription() {
 
   const hasAccessToProduct = (productId: string) => {
     // If test mode is enabled, always return true
-    if (testMode) return true;
-    
-    // VIP users always have access
-    if (subscriptions.some(sub => sub.is_vip)) return true;
+    if (testMode || isAdmin) return true;
     
     return hasActiveSubscription(productId);
-  };
-
-  const isVip = () => {
-    return subscriptions.some(sub => sub.is_vip);
   };
 
 
@@ -95,8 +106,6 @@ export function useSubscription() {
     loading,
     hasActiveSubscription,
     hasAccessToProduct,
-    isVip,
     refetch: fetchSubscriptions
   };
 }
-

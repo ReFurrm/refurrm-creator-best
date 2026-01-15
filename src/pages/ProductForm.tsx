@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -10,18 +10,15 @@ import { Switch } from '@/components/ui/switch';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import DashboardNav from '@/components/DashboardNav';
 import AIProductGenerator from '@/components/AIProductGenerator';
-import { ArrowLeft, Sparkles, Upload, Plus, X, Package, AlertCircle } from 'lucide-react';
+import { ArrowLeft, Sparkles, Upload, Plus, X, Package } from 'lucide-react';
+
 import { useToast } from '@/hooks/use-toast';
-import { useSubscription } from '@/hooks/useSubscription';
-import { Alert, AlertDescription } from '@/components/ui/alert';
 
 export default function ProductForm() {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { hasActiveSubscription, isVip } = useSubscription();
   const [productType, setProductType] = useState('digital');
   const [showAIModal, setShowAIModal] = useState(false);
-
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -45,6 +42,19 @@ export default function ProductForm() {
     requiresShipping: true,
     variants: []
   });
+
+  const addModule = () => {
+    setFormData({
+      ...formData,
+      modules: [...formData.modules, { title: '', description: '' }]
+    });
+  };
+
+  const updateModule = (index: number, field: string, value: string) => {
+    const updatedModules = [...formData.modules];
+    updatedModules[index] = { ...updatedModules[index], [field]: value };
+    setFormData({ ...formData, modules: updatedModules });
+  };
 
 
 
@@ -109,27 +119,9 @@ export default function ProductForm() {
           
           <h1 className="text-3xl font-bold text-gray-900">Create New Product</h1>
           <p className="text-gray-600 mt-2">Add a new product to your store</p>
-
         </div>
 
-        {!hasActiveSubscription() && !isVip() && (
-          <Alert className="mb-6 bg-blue-50 border-blue-200">
-            <AlertCircle className="h-4 w-4 text-blue-600" />
-            <AlertDescription className="text-blue-900">
-              <strong>No Cost to Start!</strong> Create and save products now. Subscribe when you're ready to publish and start selling.
-              <Button 
-                onClick={() => navigate('/pricing')} 
-                variant="link" 
-                className="ml-2 p-0 h-auto text-blue-600 underline"
-              >
-                View Plans
-              </Button>
-            </AlertDescription>
-          </Alert>
-        )}
-
         <form onSubmit={handleSubmit}>
-
           <Card className="mb-6">
             <CardHeader>
               <CardTitle>Product Type</CardTitle>
@@ -288,13 +280,43 @@ export default function ProductForm() {
                 <CardDescription>Organize your course content</CardDescription>
               </CardHeader>
               <CardContent>
-                <Button type="button" variant="outline" className="mb-4">
+                <Button type="button" variant="outline" className="mb-4" onClick={addModule}>
                   <Plus className="mr-2 h-4 w-4" />
                   Add Module
                 </Button>
-                <p className="text-sm text-gray-600">
-                  Start by adding modules, then add lessons to each module.
-                </p>
+                {formData.modules.length === 0 ? (
+                  <p className="text-sm text-gray-600">
+                    Start by adding modules, then add lessons to each module.
+                  </p>
+                ) : (
+                  <div className="space-y-4">
+                    {formData.modules.map((module: any, index: number) => (
+                      <div key={index} className="rounded-lg border border-gray-200 p-4">
+                        <div className="space-y-3">
+                          <div>
+                            <Label htmlFor={`module-title-${index}`}>Module Title</Label>
+                            <Input
+                              id={`module-title-${index}`}
+                              value={module.title}
+                              onChange={(e) => updateModule(index, 'title', e.target.value)}
+                              placeholder="e.g., Getting Started"
+                            />
+                          </div>
+                          <div>
+                            <Label htmlFor={`module-description-${index}`}>Module Description</Label>
+                            <Textarea
+                              id={`module-description-${index}`}
+                              value={module.description}
+                              onChange={(e) => updateModule(index, 'description', e.target.value)}
+                              placeholder="What will learners cover in this module?"
+                              className="min-h-[80px]"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </CardContent>
             </Card>
           )}

@@ -59,19 +59,18 @@ export default function Signup() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-[#EDDACE] via-[#C24C1A]/10 to-[#1E8D70]/20 flex items-center justify-center p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-bold">Start Your Free Trial</CardTitle>
+          <CardTitle className="text-2xl font-bold text-[#5C4033]">Start Your Free Trial</CardTitle>
           <CardDescription>
-            No credit card required. Get started in seconds.
+            14 days free. Then $29/month. Cancel anytime.
           </CardDescription>
-
         </CardHeader>
         <form onSubmit={handleSubmit}>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="brandName">Brand Name</Label>
+              <Label htmlFor="brandName" className="text-[#5C4033]">Brand Name</Label>
               <Input
                 id="brandName"
                 type="text"
@@ -82,7 +81,7 @@ export default function Signup() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email" className="text-[#5C4033]">Email</Label>
               <Input
                 id="email"
                 type="email"
@@ -93,7 +92,7 @@ export default function Signup() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password" className="text-[#5C4033]">Password</Label>
               <Input
                 id="password"
                 type="password"
@@ -104,7 +103,7 @@ export default function Signup() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="confirmPassword">Confirm Password</Label>
+              <Label htmlFor="confirmPassword" className="text-[#5C4033]">Confirm Password</Label>
               <Input
                 id="confirmPassword"
                 type="password"
@@ -118,7 +117,7 @@ export default function Signup() {
           <CardFooter className="flex flex-col gap-4">
             <Button 
               type="submit" 
-              className="w-full bg-purple-600 hover:bg-purple-700"
+              className="w-full bg-[#C24C1A] hover:bg-[#A63D14]"
               disabled={loading}
             >
               {loading ? (
@@ -132,7 +131,7 @@ export default function Signup() {
             </Button>
             <p className="text-sm text-center text-muted-foreground">
               Already have an account?{' '}
-              <Link to="/login" className="text-purple-600 hover:underline">
+              <Link to="/login" className="text-[#C24C1A] hover:underline">
                 Sign in
               </Link>
             </p>

@@ -63,7 +63,7 @@ export default function AIEmailGenerator({ open, onClose, onApply }: Props) {
       <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
-            <Sparkles className="w-5 h-5 text-purple-600" />
+            <Sparkles className="w-5 h-5 text-[#C24C1A]" />
             AI Email Generator
           </DialogTitle>
           <DialogDescription>
@@ -105,7 +105,7 @@ export default function AIEmailGenerator({ open, onClose, onApply }: Props) {
                 </SelectContent>
               </Select>
             </div>
-            <Button onClick={handleGenerate} disabled={loading} className="w-full bg-purple-600 hover:bg-purple-700">
+            <Button onClick={handleGenerate} disabled={loading} className="w-full bg-[#C24C1A] hover:bg-[#A63D14]">
               {loading ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Generating...</> : <><Sparkles className="mr-2 h-4 w-4" />Generate Email</>}
             </Button>
           </div>
@@ -122,10 +122,10 @@ export default function AIEmailGenerator({ open, onClose, onApply }: Props) {
               <p className="text-xs text-gray-500 mb-2">Choose the one that resonates best</p>
               <div className="space-y-2">
                 {result.subjectLines?.map((s: string, i: number) => (
-                  <div key={i} className="p-3 bg-gradient-to-r from-purple-50 to-blue-50 rounded border flex items-center justify-between group hover:shadow-md transition-shadow">
-                    <span className="text-sm font-medium">{s}</span>
+                  <div key={i} className="p-3 bg-[#EDDACE]/50 border border-[#C24C1A]/30 rounded flex items-center justify-between group hover:shadow-md transition-shadow">
+                    <span className="text-sm font-medium text-[#5C4033]">{s}</span>
                     <Button size="sm" variant="ghost" onClick={() => copyToClipboard(s, `subject-${i}`)}>
-                      {copiedId === `subject-${i}` ? <Check className="h-4 w-4 text-green-600" /> : <Copy className="h-4 w-4" />}
+                      {copiedId === `subject-${i}` ? <Check className="h-4 w-4 text-[#1E8D70]" /> : <Copy className="h-4 w-4" />}
                     </Button>
                   </div>
                 ))}
@@ -136,13 +136,13 @@ export default function AIEmailGenerator({ open, onClose, onApply }: Props) {
               <div className="flex items-center justify-between mb-2">
                 <Label className="text-base font-semibold">Email Body</Label>
                 <Button size="sm" variant="ghost" onClick={() => copyToClipboard(result.emailBody?.replace(/<[^>]*>/g, ''), 'body')}>
-                  {copiedId === 'body' ? <Check className="h-4 w-4 text-green-600" /> : <Copy className="h-4 w-4" />}
+                  {copiedId === 'body' ? <Check className="h-4 w-4 text-[#1E8D70]" /> : <Copy className="h-4 w-4" />}
                 </Button>
               </div>
               <div className="p-4 bg-white rounded border text-sm leading-relaxed" dangerouslySetInnerHTML={{ __html: result.emailBody }} />
             </div>
 
-            <Button onClick={() => { onApply(result); onClose(); }} className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
+            <Button onClick={() => { onApply(result); onClose(); }} className="w-full bg-[#C24C1A] hover:bg-[#A63D14]">
               Use This Email
             </Button>
           </div>
