@@ -2,7 +2,7 @@
 import { BusinessInfo } from './pdfGenerator';
 
 export const generatePrivacyPDF = (info: BusinessInfo) => {
-  // @ts-ignore
+  // @ts-expect-error - jsPDF is injected at runtime via window.jspdf
   const { jsPDF } = window.jspdf || {};
   if (!jsPDF) {
     alert('PDF library not loaded. Please refresh the page.');

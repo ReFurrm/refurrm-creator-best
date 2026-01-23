@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/lib/supabase';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -41,11 +41,7 @@ export default function StoreBuilder() {
     business_address: ''
   });
 
-  useEffect(() => {
-    loadStoreData();
-  }, [user]);
-
-  const loadStoreData = async () => {
+  const loadStoreData = useCallback(async () => {
     if (!user) return;
     const { data } = await supabase
       .from('user_profiles')
@@ -56,7 +52,11 @@ export default function StoreBuilder() {
     if (data) {
       setStoreData(prev => ({ ...prev, ...data }));
     }
-  };
+  }, [user]);
+
+  useEffect(() => {
+    loadStoreData();
+  }, [loadStoreData]);
 
   const saveStoreData = async () => {
     if (!user) return;

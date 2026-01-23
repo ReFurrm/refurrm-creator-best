@@ -9,7 +9,7 @@ export interface BusinessInfo {
 }
 
 export const generateCreatorRightsPDF = (info: BusinessInfo) => {
-  // @ts-ignore - jsPDF will be available at runtime
+  // @ts-expect-error - jsPDF is injected at runtime via window.jspdf
   const { jsPDF } = window.jspdf || {};
   if (!jsPDF) {
     alert('PDF library not loaded. Please refresh the page.');

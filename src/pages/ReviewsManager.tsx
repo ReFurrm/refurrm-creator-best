@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -25,17 +25,17 @@ export default function ReviewsManager() {
   const [selectedReview, setSelectedReview] = useState<Review | null>(null);
   const [response, setResponse] = useState('');
 
-  useEffect(() => {
-    loadReviews();
-  }, [filter]);
-
-  const loadReviews = async () => {
+  const loadReviews = useCallback(async () => {
     let query = supabase.from('product_reviews').select('*').order('created_at', { ascending: false });
     if (filter === 'pending') query = query.eq('is_approved', false);
     if (filter === 'approved') query = query.eq('is_approved', true);
     const { data } = await query;
     if (data) setReviews(data);
-  };
+  }, [filter]);
+
+  useEffect(() => {
+    loadReviews();
+  }, [loadReviews]);
 
   const handleApprove = async (id: string) => {
     await supabase.from('product_reviews').update({ is_approved: true }).eq('id', id);

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/lib/supabase';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -14,12 +14,7 @@ export default function PrintifyIntegration() {
   const [connected, setConnected] = useState(false);
   const { toast } = useToast();
 
-  useEffect(() => {
-    loadShops();
-    checkConnection();
-  }, []);
-
-  const loadShops = async () => {
+  const loadShops = useCallback(async () => {
     setLoading(true);
     const { data, error } = await supabase.functions.invoke('printify-get-shops');
     
@@ -29,9 +24,9 @@ export default function PrintifyIntegration() {
       setShops(data.shops);
     }
     setLoading(false);
-  };
+  }, [toast]);
 
-  const checkConnection = async () => {
+  const checkConnection = useCallback(async () => {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return;
 
@@ -46,7 +41,12 @@ export default function PrintifyIntegration() {
       setConnected(true);
       setSelectedShop(data.config?.shopId);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    loadShops();
+    checkConnection();
+  }, [checkConnection, loadShops]);
 
   const saveConnection = async () => {
     const { data: { user } } = await supabase.auth.getUser();

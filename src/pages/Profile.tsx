@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/lib/supabase';
 import DashboardNav from '@/components/DashboardNav';
@@ -13,13 +13,7 @@ export default function Profile() {
   const [stores, setStores] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    if (user) {
-      loadUserData();
-    }
-  }, [user]);
-
-  const loadUserData = async () => {
+  const loadUserData = useCallback(async () => {
     try {
       const [campaignsRes, storesRes] = await Promise.all([
         supabase.from('artist_campaigns').select('*').eq('user_id', user?.id).order('created_at', { ascending: false }),
@@ -33,7 +27,13 @@ export default function Profile() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [user]);
+
+  useEffect(() => {
+    if (user) {
+      loadUserData();
+    }
+  }, [loadUserData, user]);
 
   return (
     <div className="min-h-screen bg-[#EDDACE]">

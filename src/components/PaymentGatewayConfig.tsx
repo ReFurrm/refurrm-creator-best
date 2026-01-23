@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/lib/supabase';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -29,11 +29,7 @@ export default function PaymentGatewayConfig() {
     is_active: false
   });
 
-  useEffect(() => {
-    loadConfigs();
-  }, [user]);
-
-  const loadConfigs = async () => {
+  const loadConfigs = useCallback(async () => {
     if (!user) return;
     const { data } = await supabase
       .from('payment_gateways')
@@ -60,7 +56,11 @@ export default function PaymentGatewayConfig() {
         }
       });
     }
-  };
+  }, [user]);
+
+  useEffect(() => {
+    loadConfigs();
+  }, [loadConfigs]);
 
   const saveStripeConfig = async () => {
     if (!user) return;

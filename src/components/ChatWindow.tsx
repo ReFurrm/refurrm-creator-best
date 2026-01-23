@@ -1,10 +1,9 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { Send, Paperclip, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ChatMessage } from './ChatMessage';
 import { supabase } from '@/lib/supabase';
-import { useToast } from '@/hooks/use-toast';
 
 interface Message {
   id: string;
@@ -29,7 +28,11 @@ export function ChatWindow({ conversationId, senderType, senderName }: ChatWindo
   const [sending, setSending] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const { toast } = useToast();
+
+  const loadMessages = useCallback(async () => {
+    const { data } = await supabase.from('messages').select('*').eq('conversation_id', conversationId).order('created_at');
+    if (data) setMessages(data);
+  }, [conversationId]);
 
   useEffect(() => {
     loadMessages();
@@ -41,16 +44,11 @@ export function ChatWindow({ conversationId, senderType, senderName }: ChatWindo
       .subscribe();
 
     return () => { supabase.removeChannel(channel); };
-  }, [conversationId]);
+  }, [conversationId, loadMessages]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
-
-  const loadMessages = async () => {
-    const { data } = await supabase.from('messages').select('*').eq('conversation_id', conversationId).order('created_at');
-    if (data) setMessages(data);
-  };
 
   const handleSend = async () => {
     if (!newMessage.trim() && !file) return;

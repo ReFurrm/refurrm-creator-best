@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { supabase } from '@/lib/supabase';
 
@@ -9,11 +9,7 @@ export default function Success() {
   const [loading, setLoading] = useState(true);
   const [downloading, setDownloading] = useState(false);
 
-  useEffect(() => {
-    loadOrder();
-  }, [orderId]);
-
-  const loadOrder = async () => {
+  const loadOrder = useCallback(async () => {
     if (!orderId) {
       setLoading(false);
       return;
@@ -27,7 +23,11 @@ export default function Success() {
 
     setOrder(data);
     setLoading(false);
-  };
+  }, [orderId]);
+
+  useEffect(() => {
+    loadOrder();
+  }, [loadOrder]);
 
   const handleDownload = async () => {
     if (!order?.download_token) return;
@@ -149,4 +149,3 @@ export default function Success() {
     </div>
   );
 }
-

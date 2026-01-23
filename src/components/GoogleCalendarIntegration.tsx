@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
@@ -11,12 +11,7 @@ export default function GoogleCalendarIntegration() {
   const [loading, setLoading] = useState(true);
   const [syncing, setSyncing] = useState(false);
 
-  useEffect(() => {
-    loadIntegration();
-    loadSyncLogs();
-  }, [user]);
-
-  const loadIntegration = async () => {
+  const loadIntegration = useCallback(async () => {
     if (!user) return;
     const { data: shopData } = await supabase.from('shops').select('id').eq('user_id', user.id).single();
     if (shopData) {
@@ -24,16 +19,21 @@ export default function GoogleCalendarIntegration() {
       setIntegration(data);
     }
     setLoading(false);
-  };
+  }, [user]);
 
-  const loadSyncLogs = async () => {
+  const loadSyncLogs = useCallback(async () => {
     if (!user) return;
     const { data: shopData } = await supabase.from('shops').select('id').eq('user_id', user.id).single();
     if (shopData) {
       const { data } = await supabase.from('calendar_sync_logs').select('*, bookings(customer_name)').eq('shop_id', shopData.id).order('created_at', { ascending: false }).limit(10);
       setSyncLogs(data || []);
     }
-  };
+  }, [user]);
+
+  useEffect(() => {
+    loadIntegration();
+    loadSyncLogs();
+  }, [loadIntegration, loadSyncLogs]);
 
   const initiateOAuth = async () => {
     try {

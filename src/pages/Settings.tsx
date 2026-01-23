@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/contexts/AuthContext';
 import DashboardNav from '@/components/DashboardNav';
@@ -28,11 +28,7 @@ export default function Settings() {
     youtube_url: ''
   });
 
-  useEffect(() => {
-    loadSettings();
-  }, [user]);
-
-  const loadSettings = async () => {
+  const loadSettings = useCallback(async () => {
     if (!user) return;
 
     const { data: profileData } = await supabase
@@ -69,7 +65,11 @@ export default function Settings() {
         youtube_url: shopData.youtube_url || ''
       });
     }
-  };
+  }, [user]);
+
+  useEffect(() => {
+    loadSettings();
+  }, [loadSettings]);
 
   const saveProfile = async (e: React.FormEvent) => {
     e.preventDefault();
